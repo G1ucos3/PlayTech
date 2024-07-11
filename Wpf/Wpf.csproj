@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+	  <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ava.jpg" />
+    <None Remove="Images\Background.png" />
+    <None Remove="Images\BackgroundLogin.png" />
+    <None Remove="Images\MessageBox.png" />
+    <None Remove="Images\MessageBoxTitleGreen.png" />
+    <None Remove="Images\PlayTechIcon.png" />
+    <None Remove="Images\Slogan.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="5.0.0" />
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="5.0.0" />
+    <PackageReference Include="MaterialDesignColors" Version="3.1.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Background.png" />
+    <Resource Include="Images\BackgroundLogin.png" />
+    <Resource Include="Images\MessageBox.png" />
+    <Resource Include="Images\MessageBoxTitleGreen.png" />
+    <Resource Include="Images\PlayTechIcon.png" />
+    <Resource Include="Images\Slogan.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MVVM\Model\" />
+  </ItemGroup>
+
+</Project>

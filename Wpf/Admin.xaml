@@ -1,0 +1,69 @@
+﻿<Window x:Class="Wpf.Admin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf"
+        xmlns:viewModel="clr-namespace:Wpf.MVVM.ViewModel"
+        mc:Ignorable="d"
+        Height="600" Width="920" WindowStyle="None"
+        Background="Transparent" AllowsTransparency="True"
+        ResizeMode="NoResize">
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+
+    <Border Background="#272537"
+            CornerRadius="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="HAHA" VerticalAlignment="Center"
+                       HorizontalAlignment="Center" Foreground="White"
+                       FontSize="22"/>
+
+            <StackPanel Grid.Row="1">
+                <RadioButton Content="Home" Height="50"
+                             Foreground="White" FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="True"
+                             Command="{Binding HomeViewCommand}"/>
+                
+                <RadioButton Content="Discovery" Height="50"
+                             Foreground="White" FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding DiscoveryViewCommand}"/>
+                
+                <RadioButton Content="Featured" Height="50"
+                             Foreground="White" FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding FeatureViewCommand}"/>
+                
+            </StackPanel>
+
+            <TextBox Width="250" Height="40"
+                     VerticalContentAlignment="Center"
+                     HorizontalAlignment="Left"
+                     Margin="5"
+                     Grid.Column="1"
+                     Style="{StaticResource TextBoxTheme}"/>
+
+            <ContentControl Grid.Row="1" Grid.Column="1"
+                            Margin="10"
+                            Content="{Binding CurrentView}"/>
+        </Grid>
+
+            
+    
+        
+    </Border>
+</Window>
