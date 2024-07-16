@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:Wpf.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="800">
@@ -12,7 +13,8 @@
             <DockPanel Margin="0 12 5 0">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
                            FontSize="15" FontWeight="Bold" Foreground="White" Text="All Users"/>
-                <TextBlock Text="15 Jul 2024" Foreground="LightGray" FontSize="12"
+                <TextBlock Text="{Binding Source={x:Static sys:DateTime.Today},   
+                           StringFormat='{}{0:dddd, MMMM dd, yyyy}'}" Foreground="LightGray" FontSize="12"
                            FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right"
                            DockPanel.Dock="Right" Margin="0 0 20 0"/>
             </DockPanel>
@@ -73,7 +75,7 @@
                     </Border>
                 </Grid>
             </DockPanel>
-            <DockPanel Margin="0 20 0 0">
+            <DockPanel Margin="0 20 30 0">
                 <TextBlock Text="Filter by" FontSize="13" FontWeight="SemiBold" 
                            Foreground="White" HorizontalAlignment="Left" 
                            VerticalAlignment="Center" Margin="0 0 10 0"/>
@@ -85,6 +87,16 @@
                     <ComboBoxItem>Managers</ComboBoxItem>
                     <ComboBoxItem>Gamers</ComboBoxItem>
                 </ComboBox>
+
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                        materialDesign:RippleAssist.Feedback="White" Background="#FF4E4C4C"
+                        Foreground="LightGray" materialDesign:ButtonAssist.CornerRadius="6"
+                        Width="auto" Height="35" HorizontalAlignment="Right">   
+                    <WrapPanel>
+                        <materialDesign:PackIcon Kind="PlusThick" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                        <TextBlock Text="Add new user"/>
+                    </WrapPanel>
+                </Button>
             </DockPanel>
 
             <Separator Height="1" Background="LightGray" Margin="0 10 30 10"/>
