@@ -1,17 +1,18 @@
 ﻿using System;
 using Wpf.Core;
+using Wpf.MVVM.View;
 
 namespace Wpf.MVVM.ViewModel
 {
     class MainViewModel : ObservableObject
     {
-        public RelayCommand HomeViewCommand { get; set; }
-        public RelayCommand DiscoveryViewCommand { get; set; }
-        public RelayCommand FeatureViewCommand { get; set; }
+        public RelayCommand A_UsersCommand { get; set; }
+        public RelayCommand A_ComputersCommand { get; set; }
+        public RelayCommand A_ProductsCommand { get; set; }
 
-        public HomeViewModel HomeVM { get; set; }
-        public DiscoveryViewModel DiscoveryVM { get; set; }
-        public FeatureViewModel FeatureVM { get; set; }
+        public A_ComputersViewModel A_ComputersVM { get; set; }
+        public A_ProductsViewModel A_ProductsVM { get; set; }
+        public A_UsersViewModel A_UsersVM { get; set; }
 
         private object _currentView;
 
@@ -28,24 +29,24 @@ namespace Wpf.MVVM.ViewModel
 
         public MainViewModel()
         {
-            HomeVM = new HomeViewModel();
-            DiscoveryVM = new DiscoveryViewModel();
-            FeatureVM = new FeatureViewModel();
-            CurrentView = HomeVM;
+            A_ComputersVM = new A_ComputersViewModel();
+            A_ProductsVM = new A_ProductsViewModel();
+            A_UsersVM = new A_UsersViewModel();
+            CurrentView = A_UsersVM;
 
-            HomeViewCommand = new RelayCommand(o =>
+            A_UsersCommand = new RelayCommand(o =>
             {
-                CurrentView = HomeVM;
+                CurrentView = A_UsersVM;
             });
 
-            DiscoveryViewCommand = new RelayCommand(o =>
+            A_ComputersCommand = new RelayCommand(o =>
             {
-                CurrentView = DiscoveryVM;
+                CurrentView = A_ComputersVM;
             });
 
-            FeatureViewCommand = new RelayCommand(o =>
+            A_ProductsCommand = new RelayCommand(o =>
             {
-                CurrentView = FeatureVM;
+                CurrentView = A_ProductsVM;
             });
         }
     }

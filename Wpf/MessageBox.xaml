@@ -53,8 +53,14 @@
                     <ColumnDefinition Width="40*"/>
                     <ColumnDefinition Width="20*"/>
                 </Grid.ColumnDefinitions>
-                <Button Name="btnOk" Click="btnOk_Click" Grid.Column="1" Content="OK"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Height="30" Margin="2"/>
-                <Button Name="btnCancel" Click="btnCancel_Click" Grid.Column="2" Content="Close" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Height="30" Margin="2"/>
+                <Button Name="btnOk" Click="btnOk_Click" Grid.Column="1" 
+                        Content="OK"  HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" Width="80" Height="30" 
+                        Margin="2" Style="{StaticResource ModernButtonStyle}"/>
+                <Button Name="btnCancel" Click="btnCancel_Click" Grid.Column="2" 
+                        Content="Close" HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" Width="80" Height="30" 
+                        Margin="2" Style="{StaticResource ModernButtonStyle}"/>
             </Grid>
         </Grid>
     </Border>

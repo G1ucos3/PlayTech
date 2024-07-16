@@ -23,5 +23,38 @@ namespace Wpf
         {
             InitializeComponent();
         }
+
+        private void btnUsers_Click(object sender, RoutedEventArgs e)
+        {
+            btnUsers.Background = new SolidColorBrush(Colors.DimGray);
+            btnComputers.Background = new SolidColorBrush(Colors.Transparent);
+            btnProducts.Background = new SolidColorBrush(Colors.Transparent);
+        }
+
+        private void btnComputers_Click(object sender, RoutedEventArgs e)
+        {
+            btnUsers.Background = new SolidColorBrush(Colors.Transparent);
+            btnComputers.Background = new SolidColorBrush(Colors.DimGray);
+            btnProducts.Background = new SolidColorBrush(Colors.Transparent);
+        }
+
+        private void btnProducts_Click(object sender, RoutedEventArgs e)
+        {
+            btnUsers.Background = new SolidColorBrush(Colors.Transparent);
+            btnComputers.Background = new SolidColorBrush(Colors.Transparent);
+            btnProducts.Background = new SolidColorBrush(Colors.DimGray);
+        }
+
+        private void btnlogout_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.DialogResult result = MessageBox.Show("Are you sure?", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Yes,
+                                                    MessageBox.MessageBoxButton.No);
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                var login = new Login();
+                login.Show();
+                this.Close();
+            }
+        }
     }
 }

@@ -34,6 +34,7 @@ namespace Wpf
         {
             var admin = new Admin();
             admin.Show();
+            this.Close();
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)

@@ -11,9 +11,12 @@
   <ItemGroup>
     <None Remove="ava.jpg" />
     <None Remove="Images\Background.png" />
+    <None Remove="Images\Background2.png" />
     <None Remove="Images\BackgroundLogin.png" />
+    <None Remove="Images\default.png" />
     <None Remove="Images\MessageBox.png" />
     <None Remove="Images\MessageBoxTitleGreen.png" />
+    <None Remove="Images\NavbarBackground.png" />
     <None Remove="Images\PlayTechIcon.png" />
     <None Remove="Images\Slogan.png" />
   </ItemGroup>
@@ -27,9 +30,12 @@
 
   <ItemGroup>
     <Resource Include="Images\Background.png" />
+    <Resource Include="Images\Background2.png" />
     <Resource Include="Images\BackgroundLogin.png" />
+    <Resource Include="Images\default.png" />
     <Resource Include="Images\MessageBox.png" />
     <Resource Include="Images\MessageBoxTitleGreen.png" />
+    <Resource Include="Images\NavbarBackground.png" />
     <Resource Include="Images\PlayTechIcon.png" />
     <Resource Include="Images\Slogan.png" />
   </ItemGroup>
