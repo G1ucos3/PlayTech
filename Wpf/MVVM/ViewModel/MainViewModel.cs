@@ -26,6 +26,16 @@ namespace Wpf.MVVM.ViewModel
             }
         }
 
+        public object CCurrentView
+        {
+            get { return _currentView; }
+            set
+            {
+                _currentView = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public MainViewModel()
         {
@@ -33,6 +43,7 @@ namespace Wpf.MVVM.ViewModel
             A_ProductsVM = new A_ProductsViewModel();
             A_UsersVM = new A_UsersViewModel();
             CurrentView = A_UsersVM;
+            CCurrentView = A_ProductsVM;
 
             A_UsersCommand = new RelayCommand(o =>
             {

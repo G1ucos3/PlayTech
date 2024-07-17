@@ -106,21 +106,11 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" IsReadOnly="True" Width="auto" Binding="{Binding Number}"/>
 
-                    <DataGridTemplateColumn Header="Member" IsReadOnly="True" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
+                    <DataGridTextColumn Header="Username" IsReadOnly="True" Width="*"/>
 
-                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-
-                    <DataGridTextColumn Header="Position" IsReadOnly="True" Width="*" Binding="{Binding Position}"/>
                     <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*" Binding="{Binding Email}"/>
-                    <DataGridTextColumn Header="Phone" IsReadOnly="True" Width="*" Binding="{Binding Phone}"/>
+                    <DataGridTextColumn Header="Computer" IsReadOnly="True" Width="*" Binding="{Binding Phone}"/>
+                    <DataGridTextColumn Header="Time remain" IsReadOnly="True" Width="*"/>
 
                     <DataGridTemplateColumn Header="Operations"  IsReadOnly="True" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
