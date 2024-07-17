@@ -17,11 +17,11 @@ using UserControl = System.Windows.Controls.UserControl;
 namespace Wpf.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for DiscoveryView.xaml
+    /// Interaction logic for M_OrdersView.xaml
     /// </summary>
-    public partial class DiscoveryView : UserControl
+    public partial class M_OrdersView : UserControl
     {
-        public DiscoveryView()
+        public M_OrdersView()
         {
             InitializeComponent();
         }

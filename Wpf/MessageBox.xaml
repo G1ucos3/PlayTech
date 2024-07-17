@@ -9,10 +9,7 @@
         Title="MessageBox" Height="180" Width="300" AllowsTransparency="True" 
         MouseDown="Window_MouseDown" Background="Transparent"
         WindowStyle="None" WindowStartupLocation="CenterScreen">
-    <Border x:Name="msgBorder" Style="{StaticResource MessageBox}">
-        <Border.Background>
-            <ImageBrush ImageSource="/Images/MessageBox.png"/>
-        </Border.Background>
+    <Border x:Name="bdMain" Background="Black" BorderBrush="Red" CornerRadius="10" BorderThickness="2">
         <Grid>
 
             <Grid.RowDefinitions>
@@ -21,17 +18,14 @@
                 <RowDefinition Height="25*"/>
             </Grid.RowDefinitions>
 
-            <Border>
-                <Border.Background>
-                    <ImageBrush ImageSource="/Images/MessageBoxTitleGreen.png"/>
-                </Border.Background>
+            <Border x:Name="bdTitle" Background="Red" CornerRadius="10 10 0 0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20*"/>
                         <ColumnDefinition Width="80*"/>
                     </Grid.ColumnDefinitions>
-                    <materialDesign:PackIcon Kind="Application" Foreground="Gray" Width="50" Height="25" VerticalAlignment="Center"/>
-                    <TextBlock Name="txtTitle" Grid.Column="1" Text="Title" Foreground="DimGray" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                    <materialDesign:PackIcon x:Name="msgIcon" Kind="Application" Foreground="White" Width="50" Height="25" VerticalAlignment="Center"/>
+                    <TextBlock Name="txtTitle" Grid.Column="1" Text="Title" Foreground="White" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
                 </Grid>
             </Border>
 

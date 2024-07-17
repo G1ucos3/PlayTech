@@ -17,11 +17,11 @@ using UserControl = System.Windows.Controls.UserControl;
 namespace Wpf.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for HomeView.xaml
+    /// Interaction logic for M_UsersView.xaml
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class M_UsersView : UserControl
     {
-        public HomeView()
+        public M_UsersView()
         {
             InitializeComponent();
         }

@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Wpf.MVVM.ViewModel
 {
-    class HomeViewModel
+    class M_OrdersViewModel
     {
-
     }
 }

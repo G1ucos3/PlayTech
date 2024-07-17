@@ -56,12 +56,18 @@ namespace Wpf
             switch (title)
             {
                 case MessageBoxTittle.Error:
+                    messageBox.msgIcon.Kind = PackIconKind.AlertCircle;
                     messageBox.iconMsg.Kind = PackIconKind.Error;
-                    messageBox.iconMsg.Foreground = Brushes.Violet;
+                    messageBox.iconMsg.Foreground = Brushes.Red;
+                    messageBox.btnCancel.Visibility = Visibility.Collapsed;
+                    messageBox.btnOk.SetValue(Grid.ColumnSpanProperty, 2);
                     break;
                 case MessageBoxTittle.Info:
+                    messageBox.bdTitle.Background = Brushes.Green;
+                    messageBox.bdMain.BorderBrush = Brushes.Green;
+                    messageBox.msgIcon.Kind = PackIconKind.InformationOutline;
                     messageBox.iconMsg.Kind = PackIconKind.InfoCircle;
-                    messageBox.iconMsg.Foreground = Brushes.Cyan;
+                    messageBox.iconMsg.Foreground = Brushes.Blue;
                     messageBox.btnCancel.Visibility = Visibility.Collapsed;
                     messageBox.btnOk.SetValue(Grid.ColumnSpanProperty, 2);
                     break;
@@ -72,8 +78,11 @@ namespace Wpf
                     messageBox.btnOk.SetValue(Grid.ColumnSpanProperty, 2);
                     break;
                 case MessageBoxTittle.Confirm:
-                    messageBox.iconMsg.Kind = PackIconKind.QuestionMark;
-                    messageBox.iconMsg.Foreground = Brushes.Gray;
+                    messageBox.bdTitle.Background = Brushes.Purple;
+                    messageBox.bdMain.BorderBrush = Brushes.Purple;
+                    messageBox.msgIcon.Kind = PackIconKind.QuestionMark;
+                    messageBox.iconMsg.Kind = PackIconKind.HelpCircle;
+                    messageBox.iconMsg.Foreground = Brushes.Purple;
                     break;
             }
             messageBox.ShowDialog();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Wpf.MVVM.ViewModel
 {
-    class FeatureViewModel
+    class M_UsersViewModel
     {
     }
 }
