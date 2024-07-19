@@ -64,6 +64,7 @@
         <Setter Property="Background" Value="LightGray"/>
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+        <Setter Property="Height" Value="30"/>
         <Setter Property="ValidationErrorTemplate">
             <Setter.Value>
                 <ControlTemplate>
@@ -93,6 +94,7 @@
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="DGR_Border" Property="Background" Value="#FF9D9797"/>
                         </Trigger>
+                        
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -107,7 +109,7 @@
     <SolidColorBrush x:Key="{x:Static DataGrid.FocusBorderBrushKey}" Color="#FF000000"/>
 
     <Style x:Key="DataGridStyle1" TargetType="{x:Type DataGrid}">
-        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Background" Value="Red"/>
         <Setter Property="Foreground" Value="#222528"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderThickness" Value="1"/>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Wpf"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MessageBox" Height="180" Width="300" AllowsTransparency="True" 
+        Title="MessageBox" Height="500" Width="500" AllowsTransparency="True" 
         MouseDown="Window_MouseDown" Background="Transparent"
         WindowStyle="None" WindowStartupLocation="CenterScreen">
     <Border x:Name="msgBorder" Style="{StaticResource MessageBox}">

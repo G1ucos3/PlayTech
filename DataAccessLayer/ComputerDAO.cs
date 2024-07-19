@@ -1,6 +1,7 @@
 ﻿using BusinessObjects;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,13 +10,14 @@ namespace DataAccessLayer
 {
     public class ComputerDAO
     {
-        public static List<Computer> GetComputer()
+        public static ObservableCollection<Computer> GetComputer()
         {
-            var listComputer = new List<Computer>();
+            var listComputer = new ObservableCollection<Computer>();
             try
             {
                 using var db = new PlayTechContext();
-                listComputer = db.Computers.ToList();
+                var Computer = db.Computers.ToList();
+                listComputer = new ObservableCollection<Computer>(Computer);
             }
             catch (Exception ex)
             {

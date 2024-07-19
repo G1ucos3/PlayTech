@@ -13,7 +13,7 @@
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen">
 
-   <Window.DataContext>
+    <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
 

@@ -26,24 +26,12 @@ namespace Wpf.MVVM.ViewModel
             }
         }
 
-        public object CCurrentView
-        {
-            get { return _currentView; }
-            set
-            {
-                _currentView = value;
-                OnPropertyChanged();
-            }
-        }
-
-
         public MainViewModel()
         {
             A_ComputersVM = new A_ComputersViewModel();
             A_ProductsVM = new A_ProductsViewModel();
             A_UsersVM = new A_UsersViewModel();
             CurrentView = A_UsersVM;
-            CCurrentView = A_ProductsVM;
 
             A_UsersCommand = new RelayCommand(o =>
             {

@@ -1,6 +1,8 @@
 ﻿using BusinessObjects;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,13 +11,14 @@ namespace DataAccessLayer
 {
     public class OrderDAO
     {
-        public static List<Order> GetOrder()
+        public static ObservableCollection<Order> GetOrder()
         {
-            var listOrder = new List<Order>();
+            var listOrder = new ObservableCollection<Order>();
             try
             {
                 using var db = new PlayTechContext();
-                listOrder = db.Orders.ToList();
+                var Order = db.Orders.ToList();
+                listOrder = new ObservableCollection<Order>(Order);
             }
             catch (Exception ex)
             {

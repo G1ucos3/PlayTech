@@ -1,7 +1,12 @@
-﻿using System;
+﻿using BusinessObjects;
+using Service;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,38 +18,138 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wpf.Dialog;
+using Wpf.MVVM.ViewModel;
+using Button = System.Windows.Controls.Button;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace Wpf.MVVM.View
 {
-    public class Member
+    internal static class ConsoleAllocator
     {
-        public String Character { get; set; }
-        public String Number { get; set; }
-        public String Name { get; set; }
-        public String Position { get; set; }
-        public String Email { get; set; }
-        public String Phone { get; set; }
+        [DllImport(@"kernel32.dll", SetLastError = true)]
+        static extern bool AllocConsole();
+
+        [DllImport(@"kernel32.dll")]
+        static extern IntPtr GetConsoleWindow();
+
+        [DllImport(@"user32.dll")]
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        const int SwHide = 0;
+        const int SwShow = 5;
+
+
+        public static void ShowConsoleWindow()
+        {
+            var handle = GetConsoleWindow();
+
+            if (handle == IntPtr.Zero)
+            {
+                AllocConsole();
+            }
+            else
+            {
+                ShowWindow(handle, SwShow);
+            }
+        }
+
+        public static void HideConsoleWindow()
+        {
+            var handle = GetConsoleWindow();
+
+            ShowWindow(handle, SwHide);
+        }
     }
-    /// <summary>
-    /// Interaction logic for A_UsersView.xaml
-    /// </summary>
+
+    public class ComputerConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if(value is ICollection<CurrentComputer> CurrentComputers && CurrentComputers.Count > 0)
+            {
+                var computer = CurrentComputers.FirstOrDefault();
+                if (computer?.Computer != null)
+                {
+                    return computer.Computer.ComputerName;
+                }
+            }
+            return "None";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class RoleConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is int role)
+            {
+                return role switch
+                {
+                    1 => "Admin",
+                    2 => "Manager",
+                    3 => "Gamer",
+                    _ => "Unknown"
+                };
+            }
+            return "Unknown";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
     public partial class A_UsersView : UserControl
     {
+        private A_UsersViewModel A_UsersViewModel;
+
         public A_UsersView()
         {
             InitializeComponent();
+            A_UsersViewModel = new A_UsersViewModel(new UserService(), new CurrentComputerService(), new ComputerService());
+            DataContext = A_UsersViewModel;
+        }
 
-            var converter = new BrushConverter();
-            ObservableCollection<Member> members = new ObservableCollection<Member>();
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.DataContext is User user)
+            {
+                DialogResult result = MessageBox.Show("Are you sure?", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Confirm,
+                                                   MessageBox.MessageBoxButton.Cancel);
+                if(result == DialogResult.Yes)
+                {
+                    A_UsersViewModel.deleteUser(user);
+                }
+            }
+        }
 
-            members.Add(new Member { Number = "1", Character = "A", Name = "AAA AA AAA", Email = "a@a.com", Position = "Senior", Phone = "123456789" });
-            members.Add(new Member { Number = "2", Character = "B", Name = "BB BB BBB", Email = "a@a.com", Position = "Senior", Phone = "123456789" });
-            members.Add(new Member { Number = "3", Character = "C", Name = "CCC CCC CC", Email = "a@a.com", Position = "Senior", Phone = "123456789" });
-            members.Add(new Member { Number = "4", Character = "D", Name = "DDDD DDD", Email = "a@a.com", Position = "Senior", Phone = "123456789" });
-            members.Add(new Member { Number = "5", Character = "E", Name = "EEE EEE", Email = "a@a.com", Position = "Senior", Phone = "123456789" });
+        private void btnCreate_Click(object sender, RoutedEventArgs e)
+        {
+            User newUser = new User();
+            var cUser = new CreateNewUser(newUser);
+            if(cUser.ShowDialog() == true)
+            {
+                A_UsersViewModel.createUser(newUser);
+            }
+        }
 
-            userDataGrid.ItemsSource = members;
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            if(sender is Button button && button.DataContext is User user)
+            {
+                var currentUser = user;
+                var updateUser = new UpdateUser(currentUser);
+                if(updateUser.ShowDialog() == true)
+                {
+                    A_UsersViewModel.updateUser(currentUser);
+                }
+            }
         }
     }
 }

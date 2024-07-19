@@ -2,6 +2,7 @@
 using DataAccessLayer;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace Repositories
 {
     public class ComputerRepository : IComputerRepository
     {
-        public List<Computer> GetComputer() => ComputerDAO.GetComputer();
+        public ObservableCollection<Computer> GetComputer() => ComputerDAO.GetComputer();
 
         public void SaveComputer(Computer c) => ComputerDAO.SaveComputer(c);
 

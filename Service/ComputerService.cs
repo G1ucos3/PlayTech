@@ -3,6 +3,7 @@ using DataAccessLayer;
 using Repositories;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace Service
             iComputerRepository = new ComputerRepository();
         }
 
-        public List<Computer> GetComputer() => iComputerRepository.GetComputer();
+        public ObservableCollection<Computer> GetComputer() => iComputerRepository.GetComputer();
 
         public void SaveComputer(Computer c) => iComputerRepository.SaveComputer(c);
 

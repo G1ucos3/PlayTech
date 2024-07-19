@@ -18,6 +18,8 @@ public partial class PlayTechContext : DbContext
 
     public virtual DbSet<Computer> Computers { get; set; }
 
+    public virtual DbSet<CurrentComputer> CurrentComputers { get; set; }
+
     public virtual DbSet<Order> Orders { get; set; }
 
     public virtual DbSet<Product> Products { get; set; }
@@ -52,6 +54,29 @@ public partial class PlayTechContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("computerName");
             entity.Property(e => e.ComputerStatus).HasColumnName("computerStatus");
+        });
+
+        modelBuilder.Entity<CurrentComputer>(entity =>
+        {
+            entity.HasKey(e => new { e.UserId, e.ComputerId }).HasName("PK__CurrentC__2B41A5AC93EAE0E4");
+
+            entity.ToTable("CurrentComputer");
+
+            entity.Property(e => e.UserId).HasColumnName("userID");
+            entity.Property(e => e.ComputerId).HasColumnName("computerID");
+            entity.Property(e => e.StartTime)
+                .HasColumnType("datetime")
+                .HasColumnName("startTime");
+
+            entity.HasOne(d => d.Computer).WithMany(p => p.CurrentComputers)
+                .HasForeignKey(d => d.ComputerId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_cc_computer");
+
+            entity.HasOne(d => d.User).WithMany(p => p.CurrentComputers)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_cc_user");
         });
 
         modelBuilder.Entity<Order>(entity =>
@@ -105,25 +130,6 @@ public partial class PlayTechContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("userPassword");
             entity.Property(e => e.UserRoles).HasColumnName("userRoles");
-
-            entity.HasMany(d => d.Computers).WithMany(p => p.Users)
-                .UsingEntity<Dictionary<string, object>>(
-                    "CurrentComputer",
-                    r => r.HasOne<Computer>().WithMany()
-                        .HasForeignKey("ComputerId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_cc_computer"),
-                    l => l.HasOne<User>().WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_cc_user"),
-                    j =>
-                    {
-                        j.HasKey("UserId", "ComputerId").HasName("PK__CurrentC__2B41A5ACD123375F");
-                        j.ToTable("CurrentComputer");
-                        j.IndexerProperty<int>("UserId").HasColumnName("userID");
-                        j.IndexerProperty<int>("ComputerId").HasColumnName("computerID");
-                    });
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -3,6 +3,7 @@ using DataAccessLayer;
 using Repositories;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace Service
             iUserRepository = new UserRepository();
         }
 
-        public List<User> GetUser() => iUserRepository.GetUser();
+        public ObservableCollection<User> GetUser() => iUserRepository.GetUser();
 
         public void SaveUser(User u) => iUserRepository.SaveUser(u);
 

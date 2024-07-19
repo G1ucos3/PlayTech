@@ -2,6 +2,7 @@
 using DataAccessLayer;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace Repositories
     public class OrderRepository : IOrderRepository
     {
 
-        public List<Order> GetOrder() => OrderDAO.GetOrder();
+        public ObservableCollection<Order> GetOrder() => OrderDAO.GetOrder();
 
         public void SaveOrder(Order or) => OrderDAO.SaveOrder(or);
 

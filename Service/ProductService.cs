@@ -3,6 +3,7 @@ using DataAccessLayer;
 using Repositories;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace Service
             iProductRepository = new ProductRepository();
         }
 
-        public List<Product> GetProduct() => iProductRepository.GetProduct();
+        public ObservableCollection<Product> GetProduct() => iProductRepository.GetProduct();
 
         public void SaveProduct(Product p) => iProductRepository.SaveProduct(p);
 

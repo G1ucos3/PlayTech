@@ -2,6 +2,7 @@
 using DataAccessLayer;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public List<User> GetUser() => UserDAO.GetUser();
+        public ObservableCollection<User> GetUser() => UserDAO.GetUser();
 
         public void SaveUser(User u) => UserDAO.SaveUser(u);
 

@@ -1,6 +1,8 @@
 ﻿using BusinessObjects;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,13 +11,14 @@ namespace DataAccessLayer
 {
     public class UserDAO
     {
-        public static List<User> GetUser()
+        public static ObservableCollection<User> GetUser()
         {
-            var listUser = new List<User>();
+            var listUser = new ObservableCollection<User>();
             try
             {
                 using var db = new PlayTechContext();
-                listUser = db.Users.ToList();
+                var User = db.Users.ToList();
+                listUser = new ObservableCollection<User>(User);
             }
             catch (Exception ex)
             {

@@ -11,5 +11,5 @@ public partial class Computer
 
     public bool ComputerStatus { get; set; }
 
-    public virtual ICollection<User> Users { get; set; } = new List<User>();
+    public virtual ICollection<CurrentComputer> CurrentComputers { get; set; } = new List<CurrentComputer>();
 }

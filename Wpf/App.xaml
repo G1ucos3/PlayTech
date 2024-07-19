@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:Wpf"
              xmlns:viewModel="clr-namespace:Wpf.MVVM.ViewModel"
              xmlns:view="clr-namespace:Wpf.MVVM.View"
-             StartupUri="MainWindow.xaml">
+             StartupUri="Admin.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
