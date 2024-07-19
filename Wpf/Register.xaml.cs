@@ -39,8 +39,10 @@ namespace Wpf
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
+            this.Opacity = 0.7;
             System.Windows.Forms.DialogResult result = MessageBox.Show("Success", MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Confirm,
                                                     MessageBox.MessageBoxButton.Cancel);
+            this.Opacity = 1;
         }
     }
 }

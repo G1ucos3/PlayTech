@@ -9,12 +9,17 @@ namespace Wpf.MVVM.ViewModel
         public RelayCommand A_UsersCommand { get; set; }
         public RelayCommand A_ComputersCommand { get; set; }
         public RelayCommand A_ProductsCommand { get; set; }
+        public RelayCommand M_UsersCommand { get; set; }
+        public RelayCommand M_OrdersCommand { get; set; }
 
         public A_ComputersViewModel A_ComputersVM { get; set; }
         public A_ProductsViewModel A_ProductsVM { get; set; }
         public A_UsersViewModel A_UsersVM { get; set; }
+        public M_UsersViewModel M_UsersVM { get; set; }
+        public M_OrdersViewModel M_OrdersVM { get; set; }
 
         private object _currentView;
+        private object m_currentView;
 
         public object CurrentView
         {
@@ -26,12 +31,27 @@ namespace Wpf.MVVM.ViewModel
             }
         }
 
+        public object M_CurrentView
+        {
+            get { return m_currentView; }
+            set
+            {
+                m_currentView = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         public MainViewModel()
         {
             A_ComputersVM = new A_ComputersViewModel();
             A_ProductsVM = new A_ProductsViewModel();
             A_UsersVM = new A_UsersViewModel();
             CurrentView = A_UsersVM;
+
+            M_UsersVM = new M_UsersViewModel();
+            M_OrdersVM = new M_OrdersViewModel();
+            M_CurrentView = M_UsersVM;
 
             A_UsersCommand = new RelayCommand(o =>
             {
@@ -46,6 +66,16 @@ namespace Wpf.MVVM.ViewModel
             A_ProductsCommand = new RelayCommand(o =>
             {
                 CurrentView = A_ProductsVM;
+            });
+
+            M_UsersCommand = new RelayCommand(o =>
+            {
+                M_CurrentView = M_UsersVM;
+            });
+
+            M_OrdersCommand = new RelayCommand(o =>
+            {
+                M_CurrentView = M_OrdersVM;
             });
         }
     }

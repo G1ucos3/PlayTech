@@ -4,12 +4,11 @@
              xmlns:local="clr-namespace:Wpf"
              xmlns:viewModel="clr-namespace:Wpf.MVVM.ViewModel"
              xmlns:view="clr-namespace:Wpf.MVVM.View"
-             StartupUri="Admin.xaml">
+             StartupUri="Manager.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Theme/ModernButton.xaml"/>
-                <ResourceDictionary Source="/Theme/ModernBorder.xaml"/>
                 <ResourceDictionary Source="/Theme/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="/Theme/TextBoxTheme.xaml"/>
                 <ResourceDictionary Source="/Theme/ModernCombobox.xaml"/>
@@ -31,6 +30,14 @@
 
             <DataTemplate DataType="{x:Type viewModel:A_ProductsViewModel}">
                 <view:A_ProductsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:M_UsersViewModel}">
+                <view:M_UsersView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:M_OrdersViewModel}">
+                <view:M_OrdersView/>
             </DataTemplate>
 
         </ResourceDictionary>

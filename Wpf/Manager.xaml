@@ -1,0 +1,117 @@
+﻿<Window x:Class="Wpf.Manager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf"
+             xmlns:viewModel="clr-namespace:Wpf.MVVM.ViewModel"
+     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     mc:Ignorable="d"
+     Height="700" Width="1000" WindowStyle="None"
+     ResizeMode="NoResize"
+     Background="Transparent"
+     AllowsTransparency="True"
+     WindowStartupLocation="CenterScreen">
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border CornerRadius="20" Grid.ColumnSpan="5">
+            <Border.Background>
+                <ImageBrush ImageSource="Images/Background2.png" />
+            </Border.Background>
+        </Border>
+        <materialDesign:ColorZone Grid.Column="0" Height="700" 
+                               CornerRadius="15 0 0 15">
+            <materialDesign:ColorZone.Background>
+                <ImageBrush ImageSource="Images/NavbarBackground.png" />
+            </materialDesign:ColorZone.Background>
+            <StackPanel Margin="15">
+                <DockPanel Margin="0 0 0 0">
+                    
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="Images/PlayTechIcon.png" Width="70px"/>
+                    <Button Style="{StaticResource MaterialDesignIconButton}"
+                         materialDesign:RippleAssist.Feedback="White"
+                         Foreground="LightGray" materialDesign:ButtonAssist.CornerRadius="6"
+                         x:Name="btnlogout" Click="btnlogout_Click"
+                         Width="40" Height="40" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                        <materialDesign:PackIcon Kind="LogoutVariant"/>
+                    </Button>
+                </DockPanel>
+
+                <Ellipse Width="100" Height="100">
+                    <Ellipse.Fill>
+                        <ImageBrush RenderOptions.BitmapScalingMode="HighQuality" ImageSource="Images/default.png"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <TextBlock FontSize="18" FontWeight="Bold" TextAlignment="Center"
+                        Foreground="White" Text="Anh Minh Hoang"
+                        HorizontalAlignment="Center" Margin="0 10 0 0"/>
+                <TextBlock FontFamily="Helvetica" FontSize="16" Text="Admin" FontWeight="SemiBold"
+                        TextAlignment="Center" HorizontalAlignment="Center" Foreground="LightGray"
+                        Margin="0 10 0 0"/>
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                     materialDesign:RippleAssist.Feedback="White" Background="#FF4E4C4C"
+                     Foreground="LightGray" materialDesign:ButtonAssist.CornerRadius="6"
+                     Margin="0 10 0 20" Width="auto" Height="35" HorizontalAlignment="Center">
+                    <WrapPanel>
+                        <materialDesign:PackIcon Kind="Edit" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                        <TextBlock Text="Edit"/>
+                    </WrapPanel>
+                </Button>
+
+                <RadioButton Style="{StaticResource MaterialDesignFlatButton}"
+                          Foreground="{DynamicResource MaterialDesign.Brush.Primary.Dark.Foreground}"
+                          materialDesign:ButtonAssist.CornerRadius="6" Width="auto"
+                          x:Name="btnUsers" Click="btnUsers_Click" IsChecked="True" Background="DimGray"
+                          Command="{Binding M_UsersCommand}"
+                          Height="40" materialDesign:RippleAssist.Feedback="White" Margin="0 0 0 15">
+                    <WrapPanel Width="170">
+                        <materialDesign:PackIcon Kind="AccountGroup" VerticalAlignment="Center"
+                                              Margin="0 0 20 0" Foreground="White"
+                                              Height="20" Width="20"/>
+                        <TextBlock Foreground="White" FontSize="15" FontFamily="Helvetica">Users</TextBlock>
+                    </WrapPanel>
+                </RadioButton>
+
+                <RadioButton Style="{StaticResource MaterialDesignFlatButton}"
+                          Foreground="{DynamicResource MaterialDesign.Brush.Primary.Dark.Foreground}"
+                          materialDesign:ButtonAssist.CornerRadius="6" Width="auto"
+                          x:Name="btnOrders" Click="btnOrders_Click"
+                          Command="{Binding M_OrdersCommand}"
+                          Height="40" materialDesign:RippleAssist.Feedback="White" Margin="0 0 0 15">
+                    <WrapPanel Width="170">
+                        <materialDesign:PackIcon Kind="Silverware" VerticalAlignment="Center"
+                                              Margin="0 0 20 0" Foreground="White"
+                                              Height="20" Width="20"/>
+                        <TextBlock Foreground="White" FontSize="15" FontFamily="Helvetica">Orders</TextBlock>
+                    </WrapPanel>
+                </RadioButton>
+
+                <!--<RadioButton Style="{StaticResource MaterialDesignFlatButton}"
+                          Foreground="{DynamicResource MaterialDesign.Brush.Primary.Dark.Foreground}"
+                          x:Name="btnProducts" Click="btnProducts_Click"
+                          Command="{Binding A_ProductsCommand}"
+                          materialDesign:ButtonAssist.CornerRadius="6" Width="auto"
+                          Height="40" materialDesign:RippleAssist.Feedback="White" Margin="0 0 0 15">
+                    <WrapPanel Width="170">
+                        <materialDesign:PackIcon Kind="Food" VerticalAlignment="Center"
+                                              Margin="0 0 20 0" Foreground="White"
+                                              Height="20" Width="20"/>
+                        <TextBlock Foreground="White" FontSize="15" FontFamily="Helvetica">Products</TextBlock>
+                    </WrapPanel>
+                </RadioButton>-->
+            </StackPanel>
+        </materialDesign:ColorZone>
+
+        <ContentControl Grid.Column="1"
+             Content="{Binding M_CurrentView}"/>
+    </Grid>
+</Window>
