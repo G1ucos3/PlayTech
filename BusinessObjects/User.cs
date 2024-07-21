@@ -182,17 +182,6 @@ public partial class User : INotifyPropertyChanged, INotifyDataErrorInfo
         }
         else
         {
-            if (propertyName == nameof(UserPassword))
-            {
-                var password = value as string;
-                if (password != null && password.Length < 8)
-                {
-                    _errors[propertyName] = new List<string> { "Password must be at least 8 characters long" };
-                    OnErrorsChanged(propertyName);
-                    return;
-                }
-            }
-            
             _errors.Remove(propertyName);
             OnErrorsChanged(propertyName);
         }

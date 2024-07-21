@@ -21,9 +21,12 @@ namespace Wpf
 {
     public partial class Admin : Window, INotifyPropertyChanged
     {
+        private IUserService _userService;
+
         public Admin()
         {
             InitializeComponent();
+            _userService = new UserService();
         }
 
         private void btnUsers_Click(object sender, RoutedEventArgs e)
@@ -61,8 +64,15 @@ namespace Wpf
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
         {
-            var editProfile = new EditProfile();
-            editProfile.Show();
+            var currentUser = _userService.GetUserById(Int32.Parse(txtUserID.Text));
+            var editProfile = new EditProfile(currentUser);
+            if(editProfile.ShowDialog() == true)
+            {
+                _userService.UpdateUser(currentUser);
+                txtUsername.Text = currentUser.UserName;
+                var converter = new ImageSourceConverter();
+                avatar.ImageSource = (ImageSource)converter.ConvertFromString("pack://application:,,," + currentUser.UserAvatar);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

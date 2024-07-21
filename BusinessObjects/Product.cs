@@ -11,7 +11,7 @@ public partial class Product : INotifyPropertyChanged, INotifyDataErrorInfo
     private Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
 
     private int _productId;
-    public int ProductId 
+    public int ProductId
     {
         get => _productId;
         set
@@ -26,7 +26,7 @@ public partial class Product : INotifyPropertyChanged, INotifyDataErrorInfo
     }
 
     private string? _productImg;
-    public string? ProductImg 
+    public string? ProductImg
     {
         get => _productImg;
         set
@@ -42,12 +42,12 @@ public partial class Product : INotifyPropertyChanged, INotifyDataErrorInfo
 
     private string _productName;
     [Required(ErrorMessage = "Product Name is required")]
-    public string ProductName 
-    { 
+    public string ProductName
+    {
         get => _productName;
         set
         {
-            if(value != _productName)
+            if (value != _productName)
             {
                 _productName = value;
                 OnPropertyChanged(nameof(ProductName));
@@ -58,7 +58,7 @@ public partial class Product : INotifyPropertyChanged, INotifyDataErrorInfo
 
     private int _productPrice;
     [Range(1, int.MaxValue, ErrorMessage = "Price must be a positive number.")]
-    public int ProductPrice 
+    public int ProductPrice
     {
         get => _productPrice;
         set
@@ -74,12 +74,12 @@ public partial class Product : INotifyPropertyChanged, INotifyDataErrorInfo
 
     private int _productQuantity;
     [Range(1, int.MaxValue, ErrorMessage = "Quantity must be a positive number.")]
-    public int ProductQuantity 
+    public int ProductQuantity
     {
         get => _productQuantity;
         set
         {
-           if(_productQuantity != value)
+            if (_productQuantity != value)
             {
                 _productQuantity = value;
                 OnPropertyChanged(nameof(ProductQuantity));
@@ -94,7 +94,7 @@ public partial class Product : INotifyPropertyChanged, INotifyDataErrorInfo
         get => _productType;
         set
         {
-            if(_productType != value)
+            if (_productType != value)
             {
                 _productType = value;
                 OnPropertyChanged(nameof(ProductType));
@@ -104,18 +104,18 @@ public partial class Product : INotifyPropertyChanged, INotifyDataErrorInfo
     }
 
     private ICollection<Order> _orders = new List<Order>();
-    public virtual ICollection<Order> Orders 
+    public virtual ICollection<Order> Orders
     {
         get => _orders;
         set
         {
-            if(value != _orders)
+            if (value != _orders)
             {
                 _orders = value;
                 OnPropertyChanged(nameof(Orders));
                 ValidateProperty(nameof(Orders), value);
             }
-        } 
+        }
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

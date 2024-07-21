@@ -49,7 +49,7 @@
 
                 <Ellipse Width="100" Height="100">
                     <Ellipse.Fill>
-                        <ImageBrush x:Name="avatar"  RenderOptions.BitmapScalingMode="HighQuality" ImageSource="{Binding User.UserAvatar}"/>
+                        <ImageBrush x:Name="avatar"  RenderOptions.BitmapScalingMode="HighQuality" ImageSource="/Images/default.png"/>
                     </Ellipse.Fill>
                 </Ellipse>
                 <TextBox x:Name="txtUserID" Visibility="Collapsed"/>

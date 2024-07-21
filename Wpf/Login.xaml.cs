@@ -73,7 +73,6 @@ namespace Wpf
                         admin.txtUsername.Text = currentUser.UserName;
                         var converter = new ImageSourceConverter();
                         admin.avatar.ImageSource = (ImageSource)converter.ConvertFromString("pack://application:,,," + currentUser.UserAvatar);
-                        //admin.avatar.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Absolute));
                         admin.Show();
                         this.Close();
                     }
