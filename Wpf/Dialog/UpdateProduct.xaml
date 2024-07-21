@@ -6,38 +6,52 @@
         xmlns:local="clr-namespace:Wpf.Dialog"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-                                    WindowStartupLocation="CenterScreen"
-Title="Create Product" Height="450" Width="400">
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        Height="450" Width="400">
 
-    <Grid Margin="0,0,0,83">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="94*" />
-        </Grid.RowDefinitions>
-        <StackPanel Margin="10,10,10,0">
-            <Label Content="Product Name"/>
-            <TextBox x:Name="productName" Text="{Binding CurrentProduct.ProductName, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
-            <Label Content="{Binding ElementName=productName, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
+    <Border Background="#FF2B2A2A" CornerRadius="10">
+        <Grid Margin="0,0,0,83">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="94*" />
+            </Grid.RowDefinitions>
+            <StackPanel Margin="10,10,10,0">
+                <TextBlock HorizontalAlignment="Center" FontSize="20" TextDecorations="Underline" FontWeight="Bold" Foreground="White" Margin="0 0 0 10">
+                    UPDATE PRODUCT
+                </TextBlock>
+                <Label Content="Product Name" Foreground="White"/>
+                <TextBox x:Name="productName" Foreground="White" BorderBrush="White" Text="{Binding CurrentProduct.ProductName, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
+                <Label Content="{Binding ElementName=productName, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
 
-            <Label Content="Product Quantity"/>
-            <TextBox x:Name="quantity" Text="{Binding CurrentProduct.ProductQuantity, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
-            <Label Content="{Binding ElementName=quantity, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
+                <Label Content="Product Quantity" Foreground="White"/>
+                <TextBox x:Name="quantity" Foreground="White" BorderBrush="White" Text="{Binding CurrentProduct.ProductQuantity, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
+                <Label Content="{Binding ElementName=quantity, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
 
-            <Label Content="Product Price"/>
-            <TextBox x:Name="price" Text="{Binding CurrentProduct.ProductPrice, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
-            <Label Content="{Binding ElementName=price, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
+                <Label Content="Product Price" Foreground="White"/>
+                <TextBox x:Name="price" Foreground="White" BorderBrush="White" Text="{Binding CurrentProduct.ProductPrice, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
+                <Label Content="{Binding ElementName=price, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
 
-            <Label Content="Product Type" Margin="0 15 0 0"/>
-            <ComboBox x:Name="cbType" SelectedValue="{Binding CurrentProduct.ProductType, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" SelectedValuePath="Tag">
-                <ComboBoxItem Content="Food" Tag="Food"/>
-                <ComboBoxItem Content="Drink" Tag="Drink"/>
-            </ComboBox>
-            <Label Content="{Binding ElementName=cbType, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
+                <Label Content="Product Type" Margin="0 15 0 0" Foreground="White"/>
+                <ComboBox x:Name="cbType" Background="Transparent" Foreground="White" 
+                          SelectedValue="{Binding CurrentProduct.ProductType, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" 
+                          SelectedValuePath="Tag"
+                          Style="{StaticResource theComboBox}"
+                          ItemContainerStyle="{DynamicResource theComboBoxItem}">
+                    <ComboBoxItem Content="Food" Tag="Food" Foreground="Black"/>
+                    <ComboBoxItem Content="Drink" Tag="Drink" Foreground="Black"/>
+                </ComboBox>
+                <Label Content="{Binding ElementName=cbType, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
 
-        </StackPanel>
+            </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Margin="114,309,114,-81">
-            <Button Content="Create" Command="{Binding SubmitCommand}" Focusable="True" Margin="5"/>
-            <Button Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" Margin="5"/>
-        </StackPanel>
-    </Grid>
+            <StackPanel Orientation="Horizontal" Margin="110,309,110,-81">
+                <Button Content="Create" Command="{Binding SubmitCommand}" Focusable="True" Margin="5" Style="{StaticResource ModernButtonStyle}"
+                        Height="40" Width="80"/>
+                <Button Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" Margin="5" Style="{StaticResource ModernButtonStyle}"
+                        Height="40" Width="80"/>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>

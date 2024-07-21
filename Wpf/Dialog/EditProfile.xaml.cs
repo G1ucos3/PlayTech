@@ -31,7 +31,7 @@ namespace Wpf.Dialog
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
         private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)

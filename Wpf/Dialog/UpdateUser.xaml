@@ -5,32 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf.Dialog"
         mc:Ignorable="d"
-                    WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
-    Title="Update User" Height="400" Width="400">
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Height="400" Width="400">
 
-    <Grid Margin="0,0,0,83">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="94*" />
-        </Grid.RowDefinitions>
-        <StackPanel Margin="10,10,10,0">
-            <Label Content="Email"/>
-            <TextBox x:Name="email" Text="{Binding CurrentUser.UserEmail, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
-            <Label Content="{Binding ElementName=email, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
+    <Border Background="#FF2B2A2A" CornerRadius="10">
+        <Grid Margin="0,0,0,83">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="94*" />
+            </Grid.RowDefinitions>
+            <StackPanel Margin="10,10,10,0">
+                <TextBlock HorizontalAlignment="Center" FontSize="20" TextDecorations="Underline" FontWeight="Bold" Foreground="White" Margin="0 0 0 10">
+                    UPDATE USER
+                </TextBlock>
+                <Label Content="Email" Foreground="White"/>
+                <TextBox x:Name="email" Foreground="White" BorderBrush="White" Text="{Binding CurrentUser.UserEmail, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
+                <Label Content="{Binding ElementName=email, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
 
-            <Label Content="Username"/>
-            <TextBox x:Name="username" Text="{Binding CurrentUser.UserName, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
-            <Label Content="{Binding ElementName=username, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
+                <Label Content="Username" Foreground="White"/>
+                <TextBox x:Name="username" Foreground="White" BorderBrush="White" Text="{Binding CurrentUser.UserName, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
+                <Label Content="{Binding ElementName=username, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
 
-            <Label Content="Password"/>
-            <PasswordBox x:Name="passwordBox" PasswordChanged="passwordBox_PasswordChanged"/>
-            <TextBox x:Name="hiddenPasswordBox" Text="{Binding CurrentUser.UserPassword, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" Visibility="Collapsed"/>
-            <Label Content="{Binding ElementName=hiddenPasswordBox, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red"/>
-        </StackPanel>
+                <Label Content="Password" Foreground="White"/>
+                <PasswordBox x:Name="passwordBox" Foreground="White" BorderBrush="White" PasswordChanged="passwordBox_PasswordChanged"/>
+                <TextBox x:Name="hiddenPasswordBox" Foreground="White" BorderBrush="White"  Text="{Binding CurrentUser.UserPassword, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" Visibility="Collapsed"/>
+                <Label Content="{Binding ElementName=hiddenPasswordBox, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red"/>
+            </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Margin="114,259,114,-31">
-            <Button Content="Update" Command="{Binding SubmitCommand}" Focusable="True" Margin="5"/>
-            <Button Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" Margin="5"/>
-        </StackPanel>
-    </Grid>
+            <StackPanel Orientation="Horizontal" Margin="110,259,110,-31">
+                <Button Content="Update" Command="{Binding SubmitCommand}" Focusable="True" Margin="5" Style="{StaticResource ModernButtonStyle}"
+                    Height="40" Width="80"/>
+                <Button Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" Margin="5" Style="{StaticResource ModernButtonStyle}"
+                    Height="40" Width="80"/>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>

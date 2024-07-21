@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Wpf.Dialog;
 
 namespace Wpf
 {
@@ -57,7 +58,8 @@ namespace Wpf
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
         {
-
+            var editProfile = new EditProfile();
+            editProfile.Show();
         }
     }
 }
