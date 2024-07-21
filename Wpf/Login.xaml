@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Wpf"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="" Height="450" Width="380"
+        Title="" Height="530" Width="380"
         AllowsTransparency="True" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown">
@@ -26,13 +26,13 @@
 
         <StackPanel Grid.Row="1">
             <Grid>
-                <TextBlock Text="Username"
+                <TextBlock Text="Email"
                            FontFamily="helvetica"
                            FontSize="14"
                            Foreground="White"
                            HorizontalAlignment="Left"
                            Opacity="0.5"
-                           Margin="63, 0, 0, 0"/>          
+                           Margin="63, 0, 0, 0"/>
             </Grid>
             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                 <TextBox FontFamily="helvetica"
@@ -47,6 +47,8 @@
                     HorizontalContentAlignment="Left"
                     Opacity="0.8"
                     Height="25"
+                    x:Name="email"
+                         TextChanged="email_TextChanged"
                     Margin="63, 0, 0, 0"/>
                 <iconPacks:PackIconMaterial Kind="Account" 
                                         VerticalAlignment="Center" 
@@ -56,7 +58,10 @@
             <Border Width="250"
                     Height="2"
                     Background="White"
+                    x:Name="bdEmail"
                     Opacity="0.5"/>
+            <TextBox x:Name="hiddenText" Text="{Binding CurrentUser.UserEmail, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" Visibility="Collapsed"/>
+            <Label Content="{Binding ElementName=hiddenText, Path=(Validation.Errors)[0].ErrorContent}" Background="Transparent" Foreground="Red" Height="25" Width="250" />
 
             <Grid>
                 <TextBlock Text="Password"
@@ -79,20 +84,35 @@
                         Width="235"
                         HorizontalContentAlignment="Left"
                         Opacity="0.8"
+                             x:Name="passwordBox"
+                             PasswordChanged="passwordBox_PasswordChanged"
                         Height="25"
                         Margin="63, 0, 0, 0"/>
                 <iconPacks:PackIconMaterial Kind="Lock" 
                                             VerticalAlignment="Center" 
                                             HorizontalAlignment="Center"
                                             Foreground="White"/>
+                <Grid>
+                    <iconPacks:PackIconMaterial Kind="Eye" 
+                                                Margin="15 0 0 0"
+                                                VerticalAlignment="Center" 
+                                                HorizontalAlignment="Center"
+                                                Foreground="White" Visibility="Collapsed"/>
+                    <iconPacks:PackIconMaterial Kind="EyeClosed" 
+                                                VerticalAlignment="Center"
+                                                Foreground="White" Margin="15,0,0,0"/>
+                </Grid>
             </StackPanel>
             <Border Width="250"
                     Height="2"
                     Background="White"
+                    x:Name="bdPassword"
                     Opacity="0.5"/>
+            <TextBox x:Name="hiddenPasswordBox" Text="{Binding CurrentUser.UserPassword, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" Visibility="Collapsed"/>
+            <Label Content="{Binding (Validation.Errors)[0].ErrorContent, ElementName=hiddenPasswordBox}" Background="Transparent" Foreground="Red" Height="25" Width="250"/>
 
             <StackPanel Orientation="Horizontal" Margin="0,50,0,0">
-                <Button x:Name="btnLogin" Click="btnLogin_Click" Width="100" Height="40" Content="LOGIN" Margin="60,0,60,0" Style="{StaticResource ModernButtonStyle}"/>
+                <Button x:Name="btnLogin" Command="{Binding SubmitCommand}" Click="btnLogin_Click" Width="100" Height="40" Content="LOGIN" Margin="60,0,60,0" Style="{StaticResource ModernButtonStyle}"/>
                 <Button x:Name="btnRegister" Click="btnRegister_Click" Width="100" Height="40" Content="REGISTER" Style="{StaticResource ModernButtonStyle}"/>
             </StackPanel>
 

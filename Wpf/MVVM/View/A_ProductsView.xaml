@@ -24,16 +24,20 @@
                            Foreground="White" HorizontalAlignment="Left" 
                            VerticalAlignment="Center" Margin="0 0 10 0"/>
                     <ComboBox Padding="10 0 0 0" Background="LightGray" Width="120" HorizontalAlignment="Left" 
-            Style="{DynamicResource theComboBox}"
-            ItemContainerStyle="{DynamicResource theComboBoxItem}"
-            Height="30">
-                    <ComboBoxItem IsSelected="True">All Product</ComboBoxItem>
-                    <ComboBoxItem>Food</ComboBoxItem>
-                    <ComboBoxItem>Water</ComboBoxItem>
+                              Style="{DynamicResource theComboBox}"
+                              SelectedValuePath="Tag"
+                              SelectionChanged="cboFilter_SelectionChanged"
+                              x:Name="cboFilter"
+                              ItemContainerStyle="{DynamicResource theComboBoxItem}"
+                              Height="30">
+                    <ComboBoxItem Tag="1">All Product</ComboBoxItem>
+                    <ComboBoxItem Tag="2">Food</ComboBoxItem>
+                    <ComboBoxItem Tag="3">Drink</ComboBoxItem>
                 </ComboBox>
                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                         materialDesign:RippleAssist.Feedback="White" Background="#FF4E4C4C"
                         Foreground="LightGray" materialDesign:ButtonAssist.CornerRadius="6"
+                        x:Name="btnCreate" Click="btnCreate_Click"
                         Width="auto" Height="35" HorizontalAlignment="Right">
                     <WrapPanel>
                         <materialDesign:PackIcon Kind="PlusThick" VerticalAlignment="Center" Margin="0 0 10 0"/>
@@ -44,35 +48,35 @@
 
             <Separator Height="1" Background="LightGray" Margin="0 10 30 10"/>
             <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" 
+                      ItemsSource="{Binding Products}"
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                       RowStyle="{DynamicResource DataGridRowStyle1}" Margin="0 20 30 0" x:Name="userDataGrid">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="#" IsReadOnly="True" Width="auto" Binding="{Binding Number}"/>
+                    <DataGridTextColumn Header="ID" IsReadOnly="True" Width="auto" Binding="{Binding ProductId}"/>
 
-                    <DataGridTemplateColumn Header="Member" IsReadOnly="True" Width="*">
+                    <DataGridTemplateColumn Header="Product Name" IsReadOnly="True" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-
-                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding ProductName}" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
 
-                    <DataGridTextColumn Header="Position" IsReadOnly="True" Width="*" Binding="{Binding Position}"/>
-                    <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*" Binding="{Binding Email}"/>
-                    <DataGridTextColumn Header="Phone" IsReadOnly="True" Width="*" Binding="{Binding Phone}"/>
+                    <DataGridTextColumn Header="Price" IsReadOnly="True" Width="*" Binding="{Binding ProductPrice}"/>
+                    <DataGridTextColumn Header="Quantity" IsReadOnly="True" Width="*" Binding="{Binding ProductQuantity}"/>
+                    <DataGridTextColumn Header="Type" IsReadOnly="True" Width="*" Binding="{Binding ProductType}"/>
 
                     <DataGridTemplateColumn Header="Operations"  IsReadOnly="True" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Style="{StaticResource gridEditButton}">
+                                    <Button Style="{StaticResource gridEditButton}" x:Name="btnEdit" Click="btnEdit_Click">
                                         <materialDesign:PackIcon Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>
-                                    <Button Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0">
+                                    <Button Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0" x:Name="btnDelete" Click="btnDelete_Click">
                                         <materialDesign:PackIcon Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>
                                 </StackPanel>

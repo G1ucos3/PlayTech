@@ -18,12 +18,12 @@ namespace DataAccessLayer
                 using var db = new PlayTechContext();
                 var Computer = db.Computers.ToList();
                 listComputer = new ObservableCollection<Computer>(Computer);
+                return listComputer;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            return listComputer;
         }
 
         public static void SaveComputer(Computer c)

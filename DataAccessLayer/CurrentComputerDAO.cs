@@ -76,5 +76,26 @@ namespace DataAccessLayer
                 return new ObservableCollection<CurrentComputer>(); 
             }
         }
+
+        public static ObservableCollection<CurrentComputer> GetCurrentComputerByComputerID(int computerId)
+        {
+            try
+            {
+                using var db = new PlayTechContext();
+
+                var currentComputers = db.CurrentComputers
+                                        .Include(cc => cc.User)
+                                        .Where(cc => cc.ComputerId == computerId)
+                                        .ToList();
+                var listCurrentComputers = new ObservableCollection<CurrentComputer>(currentComputers);
+
+                return listCurrentComputers;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching CurrentComputers for UserID {computerId}: {ex.Message}");
+                return new ObservableCollection<CurrentComputer>();
+            }
+        }
     }
 }

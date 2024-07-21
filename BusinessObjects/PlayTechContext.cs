@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace BusinessObjects;
 
@@ -26,39 +25,29 @@ public partial class PlayTechContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    private string GetConnectionString()
-    {
-        IConfiguration configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", true, true).Build();
-        return configuration["ConnectionStrings:PlayTech"];
-    }
-
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseSqlServer(GetConnectionString());
-        }
-    }
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=GauDan\\GAUDAN;Database=PlayTech;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Computer>(entity =>
         {
-            entity.HasKey(e => e.ComputerId).HasName("PK__Computer__0DBB973FFB526FB5");
+            entity.HasKey(e => e.ComputerId).HasName("PK__Computer__0DBB973F8998965D");
 
             entity.Property(e => e.ComputerId).HasColumnName("computerID");
             entity.Property(e => e.ComputerName)
                 .HasMaxLength(50)
                 .HasColumnName("computerName");
+            entity.Property(e => e.ComputerSpec)
+                .HasMaxLength(400)
+                .HasColumnName("computerSpec");
             entity.Property(e => e.ComputerStatus).HasColumnName("computerStatus");
         });
 
         modelBuilder.Entity<CurrentComputer>(entity =>
         {
-            entity.HasKey(e => new { e.UserId, e.ComputerId }).HasName("PK__CurrentC__2B41A5AC93EAE0E4");
+            entity.HasKey(e => new { e.UserId, e.ComputerId }).HasName("PK__CurrentC__2B41A5AC3E6CB613");
 
             entity.ToTable("CurrentComputer");
 
@@ -81,7 +70,7 @@ public partial class PlayTechContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__Orders__0809337DBB2B1394");
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__0809337D3B3ACA1B");
 
             entity.Property(e => e.OrderId).HasColumnName("orderID");
             entity.Property(e => e.OrderDate)
@@ -101,9 +90,12 @@ public partial class PlayTechContext : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__Products__2D10D14A942F99AD");
+            entity.HasKey(e => e.ProductId).HasName("PK__Products__2D10D14A40134268");
 
             entity.Property(e => e.ProductId).HasColumnName("productID");
+            entity.Property(e => e.ProductImg)
+                .HasMaxLength(4000)
+                .HasColumnName("productImg");
             entity.Property(e => e.ProductName)
                 .HasMaxLength(50)
                 .HasColumnName("productName");
@@ -119,6 +111,9 @@ public partial class PlayTechContext : DbContext
             entity.HasKey(e => e.UserId).HasName("PK__Users__CB9A1CDF725CBB6F");
 
             entity.Property(e => e.UserId).HasColumnName("userID");
+            entity.Property(e => e.UserAvatar)
+                .HasMaxLength(4000)
+                .HasColumnName("userAvatar");
             entity.Property(e => e.UserBalance).HasColumnName("userBalance");
             entity.Property(e => e.UserEmail)
                 .HasMaxLength(150)

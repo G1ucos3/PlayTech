@@ -61,6 +61,8 @@
                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                         materialDesign:RippleAssist.Feedback="White" Background="#FF4E4C4C"
                         Foreground="LightGray" materialDesign:ButtonAssist.CornerRadius="6"
+                        x:Name="btnEditUser"
+                        Click="btnEditUser_Click"
                         Margin="0 10 0 20" Width="auto" Height="35" HorizontalAlignment="Center">
                     <WrapPanel>
                         <materialDesign:PackIcon Kind="Edit" VerticalAlignment="Center" Margin="0 0 10 0"/>

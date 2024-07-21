@@ -10,6 +10,11 @@
              d:DesignHeight="700" d:DesignWidth="800">
     <Grid>
         <StackPanel Margin="30 12 0 0">
+            <StackPanel.Resources>
+                <local:UserConverter x:Key="userConverter"/>
+                <local:StatusConverter x:Key="statusConverter"/>
+            </StackPanel.Resources>
+            
             <DockPanel Margin="0 12 5 0">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
                FontSize="15" FontWeight="Bold" Foreground="White" Text="All Computers"/>
@@ -24,16 +29,20 @@
                Foreground="White" HorizontalAlignment="Left" 
                VerticalAlignment="Center" Margin="0 0 10 0"/>
                 <ComboBox Padding="10 0 0 0" Background="LightGray" Width="120" HorizontalAlignment="Left" 
+                          SelectedValuePath="Tag"
+                          x:Name="cboFilter"
+                          SelectionChanged="cboFilter_SelectionChanged"
               Style="{DynamicResource theComboBox}"
               ItemContainerStyle="{DynamicResource theComboBoxItem}"
               Height="30">
-                    <ComboBoxItem IsSelected="True">All Computers</ComboBoxItem>
-                    <ComboBoxItem>In Use</ComboBoxItem>
-                    <ComboBoxItem>Not in use</ComboBoxItem>
+                    <ComboBoxItem Tag="1">All Computers</ComboBoxItem>
+                    <ComboBoxItem Tag="2">Online</ComboBoxItem>
+                    <ComboBoxItem Tag="3">Offline</ComboBoxItem>
                 </ComboBox>
                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                         materialDesign:RippleAssist.Feedback="White" Background="#FF4E4C4C"
                         Foreground="LightGray" materialDesign:ButtonAssist.CornerRadius="6"
+                        x:Name="btnCreate" Click="btnCreate_Click"
                         Width="auto" Height="35" HorizontalAlignment="Right">   
                     <WrapPanel>
                         <materialDesign:PackIcon Kind="PlusThick" VerticalAlignment="Center" Margin="0 0 10 0"/>
@@ -44,23 +53,36 @@
 
             <Separator Height="1" Background="LightGray" Margin="0 10 30 10"/>
             <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" 
-          ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
-          RowStyle="{DynamicResource DataGridRowStyle1}" Margin="0 20 30 0" x:Name="userDataGrid">
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                      ItemsSource="{Binding Computers}"
+                      RowStyle="{DynamicResource DataGridRowStyle1}" Margin="0 20 30 0" x:Name="userDataGrid">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" IsReadOnly="True" Width="auto" Binding="{Binding Number}"/>
+                    <DataGridTextColumn Header="ID" IsReadOnly="True" Width="auto" Binding="{Binding ComputerId}"/>
 
-                    <DataGridTextColumn Header="Computer Name" IsReadOnly="True" Width="*" Binding="{Binding Position}"/>
-                    <DataGridTextColumn Header="Status" IsReadOnly="True" Width="*" Binding="{Binding Email}"/>
-                    <DataGridTextColumn Header="Phone" IsReadOnly="True" Width="*" Binding="{Binding Phone}"/>
+                    <DataGridTextColumn Header="Computer Name" IsReadOnly="True" Width="auto" Binding="{Binding ComputerName}"/>
+                    <DataGridTextColumn Header="Computer Spec" IsReadOnly="True" Width="auto" Binding="{Binding ComputerSpec}"/>
+                    <DataGridTextColumn Header="Status" IsReadOnly="True" Width="auto" Binding="{Binding ComputerStatus, Converter={StaticResource statusConverter}}"/>
+                    <DataGridTemplateColumn Header="User" IsReadOnly="True" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding CurrentComputers, Converter={StaticResource userConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
                     <DataGridTemplateColumn Header="Operations"  IsReadOnly="True" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Style="{StaticResource gridEditButton}">
+                                    <Button Style="{StaticResource gridEditButton}"
+                                            x:Name="btnEdit"
+                                            Click="btnEdit_Click">
                                         <materialDesign:PackIcon Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>
-                                    <Button Style="{StaticResource gridRemoveButton}" Margin="5 0 0 0">
+                                    <Button Style="{StaticResource gridRemoveButton}" 
+                                            Margin="5 0 0 0"
+                                            x:Name="btnDelete"
+                                            Click="btnDelete_Click">
                                         <materialDesign:PackIcon Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>
                                 </StackPanel>

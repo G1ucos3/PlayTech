@@ -54,5 +54,10 @@ namespace Wpf
                 this.Close();
             }
         }
+
+        private void btnEditUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

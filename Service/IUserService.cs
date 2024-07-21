@@ -10,5 +10,7 @@ namespace Service
         User GetUserById(int id);
         void SaveUser(User u);
         void UpdateUser(User u);
+        public User GetUserByEmail(string email);
+        public User GetUserByUsername(string username);
     }
 }

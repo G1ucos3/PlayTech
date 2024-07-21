@@ -20,5 +20,9 @@ namespace Repositories
         public void DeleteUser(User u) => UserDAO.DeleteUser(u);
 
         public User GetUserById(int id) => UserDAO.GetUserById(id);
+
+        public User GetUserByEmail(string email) => UserDAO.GetUserByEmail(email);
+
+        public User GetUserByUsername(string username) => UserDAO.GetUserByUsername(username);
     }
 }

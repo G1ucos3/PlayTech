@@ -114,6 +114,7 @@ namespace Wpf.MVVM.View
             InitializeComponent();
             A_UsersViewModel = new A_UsersViewModel(new UserService(), new CurrentComputerService(), new ComputerService());
             DataContext = A_UsersViewModel;
+            cboFilter.SelectedValue = 4;
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -125,6 +126,7 @@ namespace Wpf.MVVM.View
                 if(result == DialogResult.Yes)
                 {
                     A_UsersViewModel.deleteUser(user);
+                    cboFilter.SelectedValue = 4;
                 }
             }
         }
@@ -136,6 +138,7 @@ namespace Wpf.MVVM.View
             if(cUser.ShowDialog() == true)
             {
                 A_UsersViewModel.createUser(newUser);
+                cboFilter.SelectedValue = 4;
             }
         }
 
@@ -148,7 +151,23 @@ namespace Wpf.MVVM.View
                 if(updateUser.ShowDialog() == true)
                 {
                     A_UsersViewModel.updateUser(currentUser);
+                    cboFilter.SelectedValue = 4;
                 }
+            }
+        }
+        private void cboFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Int32.Parse(cboFilter.SelectedValue.ToString()) == 3)
+            {
+                A_UsersViewModel.loadGamers();
+            }
+            else if(Int32.Parse(cboFilter.SelectedValue.ToString()) == 2)
+            {
+                A_UsersViewModel.loadManagers();
+            }
+            else if (Int32.Parse(cboFilter.SelectedValue.ToString()) == 4)
+            {
+                A_UsersViewModel.loadUser();
             }
         }
     }

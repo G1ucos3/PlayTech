@@ -1,0 +1,46 @@
+﻿<Window x:Class="Wpf.Dialog.CreateNewProduct"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf.Dialog"
+        mc:Ignorable="d"
+                    WindowStartupLocation="CenterScreen"
+    Title="Create Product" Height="450" Width="400">
+
+    <Grid Margin="0,0,0,83">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="94*" />
+        </Grid.RowDefinitions>
+        <StackPanel Margin="10,10,10,0">
+            <StackPanel.Resources>
+                <local:IntConverter x:Key="intConverter"/>
+            </StackPanel.Resources>
+            <Label Content="Product Name"/>
+            <TextBox x:Name="productName" Text="{Binding CurrentProduct.ProductName, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
+            <Label Content="{Binding ElementName=productName, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
+
+            <Label Content="Product Quantity"/>
+            <TextBox x:Name="quantity" Text="{Binding CurrentProduct.ProductQuantity, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True, Converter={StaticResource intConverter}}"/>
+            <Label Content="{Binding ElementName=quantity, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
+
+            <Label Content="Product Price"/>
+            <TextBox x:Name="price" Text="{Binding CurrentProduct.ProductPrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, Converter={StaticResource intConverter}}"/>
+            <Label Content="{Binding ElementName=price, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
+
+            <Label Content="Product Type" Margin="0 15 0 0"/>
+            <ComboBox x:Name="cbType" SelectedValue="{Binding CurrentProduct.ProductType, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" 
+                      SelectedValuePath="Tag">
+                <ComboBoxItem Content="Food" Tag="Food"/>
+                <ComboBoxItem Content="Drink" Tag="Drink"/>
+            </ComboBox>
+            <Label Content="{Binding ElementName=cbType, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="114,309,114,-81">
+            <Button Content="Create" Command="{Binding SubmitCommand}" Focusable="True" Margin="5"/>
+            <Button Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</Window>

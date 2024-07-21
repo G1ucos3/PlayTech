@@ -1,6 +1,7 @@
 ﻿using System;
 using Wpf.Core;
 using Wpf.MVVM.View;
+using Service;
 
 namespace Wpf.MVVM.ViewModel
 {
@@ -44,9 +45,9 @@ namespace Wpf.MVVM.ViewModel
 
         public MainViewModel()
         {
-            A_ComputersVM = new A_ComputersViewModel();
-            A_ProductsVM = new A_ProductsViewModel();
-            A_UsersVM = new A_UsersViewModel();
+            A_ComputersVM = new A_ComputersViewModel(new UserService(), new CurrentComputerService(), new ComputerService());
+            A_ProductsVM = new A_ProductsViewModel(new ProductService());
+            A_UsersVM = new A_UsersViewModel(new UserService(), new CurrentComputerService(), new ComputerService());
             CurrentView = A_UsersVM;
 
             M_UsersVM = new M_UsersViewModel();

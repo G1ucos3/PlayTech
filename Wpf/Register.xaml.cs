@@ -1,5 +1,9 @@
-﻿using System;
+﻿using BusinessObjects;
+using Microsoft.IdentityModel.Tokens;
+using Service;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,17 +15,41 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static MaterialDesignThemes.Wpf.Theme;
+using Brushes = System.Windows.Media.Brushes;
 
 namespace Wpf
 {
     /// <summary>
     /// Interaction logic for Register.xaml
     /// </summary>
-    public partial class Register : Window
+    public partial class Register : Window, INotifyPropertyChanged
     {
+        private readonly IUserService _userService;
+        public User CurrentUser { get; set; }
+        public User ConfirmUser { get; set; }
+        private AcCommand submitCommand;
+        public AcCommand SubmitCommand
+        {
+            get { return submitCommand; }
+            set
+            {
+                submitCommand = value;
+                OnPropertyChanged(nameof(SubmitCommand));
+            }
+        }
         public Register()
         {
             InitializeComponent();
+            CurrentUser = new User();
+            ConfirmUser = new User();
+            _userService = new UserService();
+            SubmitCommand = new AcCommand(Submit, CanSubmit);
+            DataContext = this;
+            CurrentUser.PropertyChanged += CurrentUser_PropertyChanged;
+            CurrentUser.ErrorsChanged += CurrentUser_ErrorsChanged;
+            ConfirmUser.PropertyChanged += CurrentUser_PropertyChanged;
+            ConfirmUser.ErrorsChanged += CurrentUser_ErrorsChanged;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -43,6 +71,66 @@ namespace Wpf
             System.Windows.Forms.DialogResult result = MessageBox.Show("Success", MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Confirm,
                                                     MessageBox.MessageBoxButton.Cancel);
             this.Opacity = 1;
+        }
+
+        private bool CanSubmit(object obj)
+        {
+            return (!string.IsNullOrEmpty(CurrentUser.UserEmail) &&
+                !string.IsNullOrEmpty(CurrentUser.UserName) &&
+                !string.IsNullOrEmpty(CurrentUser.UserPassword) &&
+                !CurrentUser.HasErrors);
+        }
+
+        private void Submit(object obj)
+        {
+            if (CurrentUser.HasErrors)
+            {
+                MessageBox.Show("Please fix validation", MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Ok, MessageBox.MessageBoxButton.Confirm);
+            }
+        }
+
+        private void CurrentUser_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            SubmitCommand.RaiseCanExecuteChanged();
+        }
+        private void CurrentUser_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
+        {
+            SubmitCommand.RaiseCanExecuteChanged();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void confirmPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            hiddenConfirmPasswordBox.Text = confirmPassword.Password;
+            if (hiddenConfirmPasswordBox.Text.IsNullOrEmpty()) bdConfirmPassword.Background = Brushes.Red;
+            else bdConfirmPassword.Background = Brushes.White;
+        }
+
+        private void password_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            hiddenPasswordBox.Text = password.Password;
+            if (hiddenPasswordBox.Text.IsNullOrEmpty()) bdPassword.Background = Brushes.Red;
+            else bdPassword.Background = Brushes.White;
+        }
+
+        private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            hiddenEmail.Text = txtEmail.Text;
+            if (hiddenEmail.Text.IsNullOrEmpty()) bdEmail.Background = Brushes.Red;
+            else bdEmail.Background = Brushes.White;
+        }
+
+        private void txtUsername_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            hiddenUsername.Text = txtUsername.Text;
+            if (hiddenUsername.Text.IsNullOrEmpty()) bdUsername.Background = Brushes.Red;
+            else bdUsername.Background = Brushes.White;
         }
     }
 }

@@ -75,5 +75,17 @@ namespace DataAccessLayer
             using var db = new PlayTechContext();
             return db.Users.FirstOrDefault(c => c.UserId.Equals(id));
         }
+
+        public static User GetUserByEmail(string email)
+        {
+            using var db = new PlayTechContext();
+            return db.Users.FirstOrDefault(c => c.UserEmail.Equals(email));
+        }
+
+        public static User GetUserByUsername(string username)
+        {
+            using var db = new PlayTechContext();
+            return db.Users.FirstOrDefault(c => c.UserName.Equals(username));
+        }
     }
 }

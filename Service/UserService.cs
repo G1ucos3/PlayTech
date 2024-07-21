@@ -28,5 +28,9 @@ namespace Service
         public void DeleteUser(User u) => iUserRepository.DeleteUser(u);
 
         public User GetUserById(int id) => iUserRepository.GetUserById(id);
+
+        public User GetUserByEmail(string email) => iUserRepository.GetUserByEmail(email);
+
+        public User GetUserByUsername(string username) => iUserRepository.GetUserByUsername(username);
     }
 }

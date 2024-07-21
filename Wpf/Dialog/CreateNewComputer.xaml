@@ -1,0 +1,31 @@
+﻿<Window x:Class="Wpf.Dialog.CreateNewComputer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf.Dialog"
+        mc:Ignorable="d"
+                   WindowStartupLocation="CenterScreen"
+    Title="Create User" Height="250" Width="400">
+
+    <Grid Margin="0,0,0,83">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="94*" />
+        </Grid.RowDefinitions>
+        <StackPanel Margin="10,10,10,0">
+            <Label Content="Computer Name"/>
+            <TextBox x:Name="computerName" Text="{Binding CurrentComputer.ComputerName, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
+            <Label Content="{Binding ElementName=computerName, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
+
+            <Label Content="Computer Spec"/>
+            <TextBox x:Name="computerSpec" Text="{Binding CurrentComputer.ComputerSpec, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
+            <Label Content="{Binding ElementName=computerSpec, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="114,151,114,-74">
+            <Button Content="Create" Command="{Binding SubmitCommand}" Focusable="True" Margin="5"/>
+            <Button Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</Window>

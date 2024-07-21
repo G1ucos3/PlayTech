@@ -26,5 +26,7 @@ namespace Service
         public void UpdateCurrentComputer(CurrentComputer c) => iCurrentComputerRepository.UpdateCurrentComputer(c);
 
         public ObservableCollection<CurrentComputer> GetCurrentComputerByUserID(int userID) => iCurrentComputerRepository.GetCurrentComputerByUserID(userID);
+
+        public ObservableCollection<CurrentComputer> GetCurrentComputerByComputerID(int computerId) => iCurrentComputerRepository.GetCurrentComputerByComputerID(computerId);  
     }
 }

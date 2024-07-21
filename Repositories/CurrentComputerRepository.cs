@@ -18,5 +18,6 @@ namespace Repositories
         public void UpdateCurrentComputer(CurrentComputer c) => CurrentComputerDAO.UpdateCurrentComputer(c);
 
         public ObservableCollection<CurrentComputer> GetCurrentComputerByUserID(int userID) => CurrentComputerDAO.GetCurrentComputerByUserID(userID);
+        public ObservableCollection<CurrentComputer> GetCurrentComputerByComputerID(int computerId) => CurrentComputerDAO.GetCurrentComputerByComputerID(computerId);
     }
 }

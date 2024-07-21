@@ -43,7 +43,7 @@
                                 <materialDesign:PackIcon Kind="AccountGroup" VerticalAlignment="Center"
                                                          Margin="0 0 10 0" Foreground="DarkBlue"
                                                          Height="30" Width="30"/>
-                                <TextBlock Foreground="Black" FontSize="25" FontWeight="Bold">20</TextBlock>
+                                <TextBlock Foreground="Black" FontSize="25" FontWeight="Bold" Text="{Binding TotalUsers}"/>
                             </WrapPanel>
                         </StackPanel>
                     </Border>
@@ -59,7 +59,7 @@
                                 <materialDesign:PackIcon Kind="AccountGroup" VerticalAlignment="Center"
                                                          Margin="0 0 10 0" Foreground="LimeGreen"
                                                          Height="30" Width="30"/>
-                                <TextBlock Foreground="Black" FontSize="25" FontWeight="Bold">20</TextBlock>
+                                <TextBlock Foreground="Black" FontSize="25" FontWeight="Bold" Text="{Binding TotalManagers}"/> 
                             </WrapPanel>
                         </StackPanel>
                     </Border>
@@ -75,7 +75,7 @@
                                 <materialDesign:PackIcon Kind="AccountGroup" VerticalAlignment="Center"
                                                          Margin="0 0 10 0" Foreground="DarkGoldenrod"
                                                          Height="30" Width="30"/>
-                                <TextBlock Foreground="Black" FontSize="25" FontWeight="Bold">20</TextBlock>
+                                <TextBlock Foreground="Black" FontSize="25" FontWeight="Bold" Text="{Binding TotalGamers}"/>
                             </WrapPanel>
                         </StackPanel>
                     </Border>
@@ -87,11 +87,14 @@
                            VerticalAlignment="Center" Margin="0 0 10 0"/>
                 <ComboBox Padding="10 0 0 0" Background="LightGray" Width="120" HorizontalAlignment="Left" 
                           Style="{DynamicResource theComboBox}"
+                          x:Name="cboFilter"
+                          SelectionChanged="cboFilter_SelectionChanged"
+                          SelectedValuePath="Tag"
                           ItemContainerStyle="{DynamicResource theComboBoxItem}"
                           Height="30">
-                    <ComboBoxItem IsSelected="True">All Users</ComboBoxItem>
-                    <ComboBoxItem>Managers</ComboBoxItem>
-                    <ComboBoxItem>Gamers</ComboBoxItem>
+                    <ComboBoxItem Content="All Users" Tag="4"/>
+                    <ComboBoxItem Content="Managers" Tag="2"/>
+                    <ComboBoxItem Content="Gamers" Tag="3"/>
                 </ComboBox>
 
                 <Button Style="{StaticResource MaterialDesignFlatButton}"
@@ -136,7 +139,9 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Style="{StaticResource gridEditButton}" Margin="8 0 0 0" x:Name="btnEdit" Click="btnEdit_Click"
+                                    <Button Style="{StaticResource gridEditButton}" Margin="8 0 0 0" 
+                                            x:Name="btnEdit"
+                                            Click="btnEdit_Click"
                                             Visibility="{Binding UserRoles}">
                                         <materialDesign:PackIcon Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>

@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.ComponentModel;
 
 namespace BusinessObjects;
 
-public partial class User: INotifyPropertyChanged, INotifyDataErrorInfo
+public partial class User : INotifyPropertyChanged, INotifyDataErrorInfo
 {
     private Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
 
     private int _userId;
-    public int UserId 
-    { 
+    public int UserId
+    {
         get => _userId;
 
         set
@@ -24,31 +23,46 @@ public partial class User: INotifyPropertyChanged, INotifyDataErrorInfo
                 OnPropertyChanged(nameof(UserId));
                 ValidateProperty(nameof(UserId), value);
             }
-        } 
+        }
+    }
+
+    private string? _userAvatar;
+    public string? UserAvatar
+    {
+        get => _userAvatar;
+        set
+        {
+            if (_userAvatar != value)
+            {
+                _userAvatar = value;
+                OnPropertyChanged(nameof(UserAvatar));
+                ValidateProperty(nameof(UserAvatar), value);
+            }
+        }
     }
 
     private string _userName;
     [Required(ErrorMessage = "Username is required")]
-    public string UserName 
-    { 
+    public string UserName
+    {
         get => _userName;
 
         set
         {
-            if( _userName != value)
+            if (_userName != value)
             {
                 _userName = value;
                 OnPropertyChanged(nameof(UserName));
                 ValidateProperty(nameof(UserName), value);
             }
-        } 
-    
+        }
+
     }
 
     private string _userEmail;
     [Required(ErrorMessage = "User Email is required")]
-    public string UserEmail 
-    { 
+    public string UserEmail
+    {
         get => _userEmail;
         set
         {
@@ -58,12 +72,12 @@ public partial class User: INotifyPropertyChanged, INotifyDataErrorInfo
                 OnPropertyChanged(nameof(UserEmail));
                 ValidateProperty(nameof(UserEmail), value);
             }
-        } 
+        }
     }
 
     private int _userBalance;
-    public int UserBalance 
-    { 
+    public int UserBalance
+    {
         get => _userBalance;
         set
         {
@@ -78,64 +92,64 @@ public partial class User: INotifyPropertyChanged, INotifyDataErrorInfo
 
     private string _userPassword;
     [Required(ErrorMessage = "Password is required")]
-    public string UserPassword 
-    { 
+    public string UserPassword
+    {
         get => _userPassword;
         set
         {
-            if( _userPassword != value)
+            if (_userPassword != value)
             {
                 _userPassword = value;
                 OnPropertyChanged(nameof(UserPassword));
                 ValidateProperty(nameof(UserPassword), value);
             }
-        } 
+        }
     }
 
     private int _userRoles;
     [Required(ErrorMessage = "Role is required")]
-    public int UserRoles 
-    { 
+    public int UserRoles
+    {
         get => _userRoles;
         set
         {
-            if( value != _userRoles)
+            if (value != _userRoles)
             {
                 _userRoles = value;
                 OnPropertyChanged(nameof(UserRoles));
                 ValidateProperty(nameof(UserRoles), value);
             }
-        } 
+        }
     }
 
     private ICollection<CurrentComputer> _currentComputers = new List<CurrentComputer>();
-    public virtual ICollection<CurrentComputer> CurrentComputers 
+    public virtual ICollection<CurrentComputer> CurrentComputers
     {
         get => _currentComputers;
         set
         {
-            if(value != _currentComputers)
+            if (value != _currentComputers)
             {
                 _currentComputers = value;
                 OnPropertyChanged(nameof(CurrentComputers));
                 ValidateProperty(nameof(CurrentComputers), value);
             }
-        } 
+        }
     }
 
     private ICollection<Order> _orders = new List<Order>();
-    public virtual ICollection<Order> Orders 
-    { 
+    public virtual ICollection<Order> Orders
+    {
         get => _orders;
         set
         {
-            if(value != _orders)
+            if (value != _orders)
             {
                 _orders = value;
                 OnPropertyChanged(nameof(Orders));
                 ValidateProperty(nameof(Orders), value);
             }
-        } 
+        }
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
