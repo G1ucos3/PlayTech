@@ -5,27 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf.Dialog"
         mc:Ignorable="d"
-                   WindowStartupLocation="CenterScreen"
-    Title="Create User" Height="250" Width="400">
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        Height="300" Width="420">
 
-    <Grid Margin="0,0,0,83">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="94*" />
-        </Grid.RowDefinitions>
-        <StackPanel Margin="10,10,10,0">
-            <Label Content="Computer Name"/>
-            <TextBox x:Name="computerName" Text="{Binding CurrentComputer.ComputerName, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
-            <Label Content="{Binding ElementName=computerName, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
+    <Border Background="#FF2B2A2A" CornerRadius="10">
+        <Grid Margin="0,0,0,83">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120*" />
+            </Grid.RowDefinitions>
+            <StackPanel Margin="10,10,10,0">
+            
+                <TextBlock HorizontalAlignment="Center" FontSize="20" TextDecorations="Underline" FontWeight="Bold" Foreground="White" Margin="0 0 0 10">
+                    ADD COMPUTER
+                </TextBlock>
 
-            <Label Content="Computer Spec"/>
-            <TextBox x:Name="computerSpec" Text="{Binding CurrentComputer.ComputerSpec, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
-            <Label Content="{Binding ElementName=computerSpec, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
+                <Label Content="Computer Name" Foreground="White"/>
+                <TextBox x:Name="computerName" Foreground="White" BorderBrush="White" Text="{Binding CurrentComputer.ComputerName, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
+                <Label Content="{Binding ElementName=computerName, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red"/>
 
-        </StackPanel>
+                <Label Content="Computer Spec" Foreground="White"/>
+                <TextBox x:Name="computerSpec" Foreground="White" BorderBrush="White" Text="{Binding CurrentComputer.ComputerSpec, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
+                <Label Content="{Binding ElementName=computerSpec, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
 
-        <StackPanel Orientation="Horizontal" Margin="114,151,114,-74">
-            <Button Content="Create" Command="{Binding SubmitCommand}" Focusable="True" Margin="5"/>
-            <Button Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" Margin="5"/>
-        </StackPanel>
-    </Grid>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="110,180,110,-90">
+                <Button Content="Create" Command="{Binding SubmitCommand}" Focusable="True" Margin="5" Style="{StaticResource ModernButtonStyle}"
+                        Height="40" Width="80"/>
+                <Button Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" Margin="5" Style="{StaticResource ModernButtonStyle}" 
+                        Height="40" Width="80"/>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>

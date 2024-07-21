@@ -157,6 +157,10 @@ namespace Wpf.MVVM.View
                     A_UsersViewModel.updateUser(currentUser);
                     cboFilter.SelectedValue = 4;
                 }
+                else
+                {
+                    A_UsersViewModel.loadUser();
+                }
             }
         }
         private void cboFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
