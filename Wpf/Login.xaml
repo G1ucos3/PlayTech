@@ -10,6 +10,7 @@
         AllowsTransparency="True" Background="Transparent"
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -37,7 +38,7 @@
             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                 <TextBox FontFamily="helvetica"
                     FontWeight="Light"
-                    FontSize="20"
+                    FontSize="15"
                     HorizontalAlignment="Center"
                     Foreground="White"
                     Background="Transparent"
@@ -59,6 +60,7 @@
                     Height="2"
                     Background="White"
                     x:Name="bdEmail"
+                    Margin="0 2 0 0"
                     Opacity="0.5"/>
             <TextBox x:Name="hiddenText" Text="{Binding CurrentUser.UserEmail, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" Visibility="Collapsed"/>
             <Label Content="{Binding ElementName=hiddenText, Path=(Validation.Errors)[0].ErrorContent}" Background="Transparent" Foreground="Red" Height="25" Width="250" />
@@ -72,46 +74,73 @@
                        Opacity="0.5"
                        Margin="63, 15, 0, 0"/>
             </Grid>
-            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                <PasswordBox FontFamily="helvetica"
-                        FontWeight="Light"
-                        FontSize="20"
-                        HorizontalAlignment="Center"
-                        Foreground="White"
-                        Background="Transparent"
-                        CaretBrush="White"
-                        BorderThickness="0"
-                        Width="235"
-                        HorizontalContentAlignment="Left"
-                        Opacity="0.8"
-                             x:Name="passwordBox"
-                             PasswordChanged="passwordBox_PasswordChanged"
-                        Height="25"
-                        Margin="63, 0, 0, 0"/>
+            <StackPanel Orientation="Horizontal">
+                <Grid Margin="63, 0, 0, 0">
+                    <PasswordBox FontFamily="helvetica"
+                                 FontWeight="Light"
+                                 FontSize="15"
+                                 HorizontalAlignment="Center"
+                                 Foreground="White"
+                                 Background="Transparent"
+                                 CaretBrush="White"
+                                 BorderThickness="0"
+                                 Width="235"
+                                 HorizontalContentAlignment="Left"
+                                 Opacity="0.8"
+                                 x:Name="passwordBox"
+                                 PasswordChanged="passwordBox_PasswordChanged"
+                                 Height="25"/>
+                    <TextBox x:Name="showPasswordBox" 
+                             FontFamily="helvetica"
+                             FontWeight="Light"
+                             FontSize="15"
+                             HorizontalAlignment="Center"
+                             Foreground="White"
+                             Background="Transparent"
+                             CaretBrush="White"
+                             BorderThickness="0"
+                             Width="235"
+                             Height="25"
+                             HorizontalContentAlignment="Left"
+                             Opacity="0.8"
+                             Visibility="Collapsed"
+                             TextChanged="showPasswordBox_TextChanged"/>
+                </Grid>
                 <iconPacks:PackIconMaterial Kind="Lock" 
                                             VerticalAlignment="Center" 
                                             HorizontalAlignment="Center"
                                             Foreground="White"/>
                 <Grid>
-                    <iconPacks:PackIconMaterial Kind="Eye" 
-                                                Margin="15 0 0 0"
-                                                VerticalAlignment="Center" 
-                                                HorizontalAlignment="Center"
-                                                Foreground="White" Visibility="Collapsed"/>
-                    <iconPacks:PackIconMaterial Kind="EyeClosed" 
-                                                VerticalAlignment="Center"
-                                                Foreground="White" Margin="15,0,0,0"/>
+                    <Button Background="Transparent"
+                            Visibility="Collapsed"
+                            BorderThickness="0"
+                            x:Name="btnShow" Click="btnShow_Click">
+                        <iconPacks:PackIconMaterial Kind="Eye" 
+                            VerticalAlignment="Center" 
+                            HorizontalAlignment="Center"
+                            Foreground="White"/>
+                    </Button>
+                    <Button Background="Transparent"
+                            BorderThickness="0"
+                            x:Name="btnHide" Click="btnHide_Click">
+                        <iconPacks:PackIconMaterial Kind="EyeClosed" 
+                            VerticalAlignment="Center"
+                            Foreground="White"/>
+                    </Button>
                 </Grid>
             </StackPanel>
             <Border Width="250"
                     Height="2"
+                    Margin="0 2 0 0"
                     Background="White"
                     x:Name="bdPassword"
                     Opacity="0.5"/>
-            <TextBox x:Name="hiddenPasswordBox" Text="{Binding CurrentUser.UserPassword, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" Visibility="Collapsed"/>
+            <TextBox x:Name="hiddenPasswordBox" 
+                     Visibility="Collapsed"
+                     Text="{Binding CurrentUser.UserPassword, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"/>
             <Label Content="{Binding (Validation.Errors)[0].ErrorContent, ElementName=hiddenPasswordBox}" Background="Transparent" Foreground="Red" Height="25" Width="250"/>
 
-            <StackPanel Orientation="Horizontal" Margin="0,50,0,0">
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                 <Button x:Name="btnLogin" Command="{Binding SubmitCommand}" Click="btnLogin_Click" Width="100" Height="40" Content="LOGIN" Margin="60,0,60,0" Style="{StaticResource ModernButtonStyle}"/>
                 <Button x:Name="btnRegister" Click="btnRegister_Click" Width="100" Height="40" Content="REGISTER" Style="{StaticResource ModernButtonStyle}"/>
             </StackPanel>

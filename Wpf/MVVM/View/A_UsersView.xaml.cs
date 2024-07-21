@@ -140,6 +140,10 @@ namespace Wpf.MVVM.View
                 A_UsersViewModel.createUser(newUser);
                 cboFilter.SelectedValue = 4;
             }
+            else
+            {
+                A_UsersViewModel.loadUser();
+            }
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)

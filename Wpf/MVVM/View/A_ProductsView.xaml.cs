@@ -57,6 +57,10 @@ namespace Wpf.MVVM.View
                     a_ProductsViewModel.updateProduct(currentProduct);
                     cboFilter.SelectedValue = 1;
                 }
+                else
+                {
+                    a_ProductsViewModel.loadProduct();
+                }
             }
         }
 

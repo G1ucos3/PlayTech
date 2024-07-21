@@ -32,7 +32,9 @@
     <Resource Include="Images\Background.png" />
     <Resource Include="Images\Background2.png" />
     <Resource Include="Images\BackgroundLogin.png" />
-    <Resource Include="Images\default.png" />
+    <Resource Include="Images\default.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\MessageBox.png" />
     <Resource Include="Images\MessageBoxTitleGreen.png" />
     <Resource Include="Images\NavbarBackground.png" />

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using BusinessObjects;
+using Service;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -15,7 +18,7 @@ using System.Windows.Shapes;
 
 namespace Wpf
 {
-    public partial class Admin : Window
+    public partial class Admin : Window, INotifyPropertyChanged
     {
         public Admin()
         {
@@ -58,6 +61,12 @@ namespace Wpf
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

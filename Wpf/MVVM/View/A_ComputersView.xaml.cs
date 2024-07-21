@@ -95,6 +95,10 @@ namespace Wpf.MVVM.View
                     A_ComputersViewModel.updateComputer(currentComputer);
                     cboFilter.SelectedValue = 1;
                 }
+                else
+                {
+                    A_ComputersViewModel.loadComputer();
+                }
             }
         }
 
