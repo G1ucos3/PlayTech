@@ -60,7 +60,7 @@ namespace DataAccessLayer
             try
             {
                 using var context = new PlayTechContext();
-                var p1 = context.Orders.SingleOrDefault(o => o.UserId == or.UserId);
+                var p1 = context.Orders.SingleOrDefault(o => o.OrderId == or.OrderId);
                 context.Orders.Remove(p1);
                 context.SaveChanges();
             }

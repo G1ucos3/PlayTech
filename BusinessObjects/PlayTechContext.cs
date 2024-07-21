@@ -33,7 +33,7 @@ public partial class PlayTechContext : DbContext
     {
         modelBuilder.Entity<Computer>(entity =>
         {
-            entity.HasKey(e => e.ComputerId).HasName("PK__Computer__0DBB973F8998965D");
+            entity.HasKey(e => e.ComputerId).HasName("PK__Computer__0DBB973F139EDE75");
 
             entity.Property(e => e.ComputerId).HasColumnName("computerID");
             entity.Property(e => e.ComputerName)
@@ -47,7 +47,7 @@ public partial class PlayTechContext : DbContext
 
         modelBuilder.Entity<CurrentComputer>(entity =>
         {
-            entity.HasKey(e => new { e.UserId, e.ComputerId }).HasName("PK__CurrentC__2B41A5AC3E6CB613");
+            entity.HasKey(e => new { e.UserId, e.ComputerId }).HasName("PK__CurrentC__2B41A5AC62858333");
 
             entity.ToTable("CurrentComputer");
 
@@ -70,27 +70,30 @@ public partial class PlayTechContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__Orders__0809337D3B3ACA1B");
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__0809337D649E60C5");
 
             entity.Property(e => e.OrderId).HasColumnName("orderID");
             entity.Property(e => e.OrderDate)
                 .HasColumnType("datetime")
                 .HasColumnName("orderDate");
+            entity.Property(e => e.OrderStatus).HasColumnName("orderStatus");
             entity.Property(e => e.ProductId).HasColumnName("productID");
             entity.Property(e => e.UserId).HasColumnName("userID");
 
             entity.HasOne(d => d.Product).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_order_product");
 
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_order_user");
         });
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__Products__2D10D14A40134268");
+            entity.HasKey(e => e.ProductId).HasName("PK__Products__2D10D14A2457550D");
 
             entity.Property(e => e.ProductId).HasColumnName("productID");
             entity.Property(e => e.ProductImg)
@@ -108,7 +111,7 @@ public partial class PlayTechContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__CB9A1CDF725CBB6F");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__CB9A1CDF200BAAD7");
 
             entity.Property(e => e.UserId).HasColumnName("userID");
             entity.Property(e => e.UserAvatar)

@@ -77,7 +77,7 @@
                         <materialDesign:PackIcon Kind="AccountGroup" VerticalAlignment="Center"
                                               Margin="0 0 20 0" Foreground="White"
                                               Height="20" Width="20"/>
-                        <TextBlock Foreground="White" FontSize="15" FontFamily="Helvetica">Users</TextBlock>
+                        <TextBlock Foreground="White" FontSize="15" FontFamily="Helvetica">Gamers</TextBlock>
                     </WrapPanel>
                 </RadioButton>
 
