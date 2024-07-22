@@ -97,5 +97,35 @@ namespace DataAccessLayer
                 return new ObservableCollection<CurrentComputer>();
             }
         }
+
+        public static void DeleteCurrentComputerByUserID(int userID)
+        {
+            try
+            {
+                using var context = new PlayTechContext();
+                var currentComputers = context.CurrentComputers.Where(o => o.UserId == userID).ToList();
+                context.CurrentComputers.RemoveRange(currentComputers);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static void DeleteCurrentComputerByComputerID(int computerID)
+        {
+            try
+            {
+                using var context = new PlayTechContext();
+                var currentComputers = context.CurrentComputers.Where(o => o.ComputerId == computerID).ToList();
+                context.CurrentComputers.RemoveRange(currentComputers);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

@@ -1,6 +1,10 @@
-﻿using System;
+﻿using BusinessObjects;
+using Service;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,11 +20,14 @@ using Wpf.Dialog;
 
 namespace Wpf
 {
-    public partial class Admin : Window
+    public partial class Admin : Window, INotifyPropertyChanged
     {
+        private IUserService _userService;
+
         public Admin()
         {
             InitializeComponent();
+            _userService = new UserService();
         }
 
         private void btnUsers_Click(object sender, RoutedEventArgs e)
@@ -58,8 +65,24 @@ namespace Wpf
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
         {
-            var editProfile = new EditProfile();
-            editProfile.Show();
+            var currentUser = _userService.GetUserById(Int32.Parse(txtUserID.Text));
+            var editProfile = new EditProfile(currentUser);
+            if(editProfile.ShowDialog() == true)
+            {
+                _userService.UpdateUser(currentUser);
+                txtUsername.Text = currentUser.UserName;
+                string workingDirectory = Environment.CurrentDirectory;
+                string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+                avatar.ImageSource = new BitmapImage(new Uri(projectDirectory + currentUser.UserAvatar, UriKind.Absolute));
+                MessageBox.Show("Update Success!", MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Confirm,
+                                                   MessageBox.MessageBoxButton.Cancel);
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

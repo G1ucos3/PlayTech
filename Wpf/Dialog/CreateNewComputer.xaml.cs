@@ -1,4 +1,5 @@
 ﻿using BusinessObjects;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Brushes = System.Windows.Media.Brushes;
 
 namespace Wpf.Dialog
 {
@@ -84,6 +86,26 @@ namespace Wpf.Dialog
         {
             DialogResult = false;
             Close();
+        }
+
+        private void computerName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            hiddenComputerName.Text = computerName.Text;
+            if (hiddenComputerName.Text.IsNullOrEmpty()) bdName.Background = Brushes.Red;
+            else bdName.Background = Brushes.White;
+        }
+
+        private void computerSpec_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            hiddenComputerSpec.Text = computerSpec.Text;
+            if(hiddenComputerSpec.Text.IsNullOrEmpty()) bdSpec.Background = Brushes.Red;
+            else bdSpec.Background= Brushes.White;
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
         }
     }
 }

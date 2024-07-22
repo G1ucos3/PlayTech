@@ -28,5 +28,9 @@ namespace Service
         public void DeleteOrder(Order or) => iOrderRepository.DeleteOrder(or);
 
         public Order GetOrderById(int id) => iOrderRepository.GetOrderById(id);
+
+        public void DeleteOrderByUserID(int userID) => iOrderRepository.DeleteOrderByUserID(userID);
+
+        public void DeleteOrderByProductID(int productID) => iOrderRepository.DeleteOrderByProductID(productID);
     }
 }

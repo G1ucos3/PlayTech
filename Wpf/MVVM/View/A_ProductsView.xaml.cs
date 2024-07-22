@@ -2,6 +2,8 @@
 using Service;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +23,6 @@ using UserControl = System.Windows.Controls.UserControl;
 
 namespace Wpf.MVVM.View
 {
-    /// <summary>
-    /// Interaction logic for A_ProductsView.xaml
-    /// </summary>
     public partial class A_ProductsView : UserControl
     {
         private A_ProductsViewModel a_ProductsViewModel;
@@ -42,6 +41,8 @@ namespace Wpf.MVVM.View
             if(createProduct.ShowDialog() == true)
             {
                 a_ProductsViewModel.createProduct(newProduct);
+                MessageBox.Show("Create Success!", MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Confirm,
+                                                   MessageBox.MessageBoxButton.Cancel);
                 cboFilter.SelectedValue = 1;
             }
         }
@@ -55,6 +56,8 @@ namespace Wpf.MVVM.View
                 if (updateProduct.ShowDialog() == true)
                 {
                     a_ProductsViewModel.updateProduct(currentProduct);
+                    MessageBox.Show("Update Success!", MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Confirm,
+                                                   MessageBox.MessageBoxButton.Cancel);
                     cboFilter.SelectedValue = 1;
                 }
                 else
@@ -66,9 +69,10 @@ namespace Wpf.MVVM.View
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+            
             if (sender is Button button && button.DataContext is Product product)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Confirm,
+                DialogResult result = MessageBox.Show($"Are you sure you want to delete {product.ProductName}", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Confirm,
                                                    MessageBox.MessageBoxButton.Cancel);
                 if (result == DialogResult.Yes)
                 {

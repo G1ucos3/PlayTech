@@ -27,13 +27,13 @@ public partial class PlayTechContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=GAUDAN\\GauDan;Database=PlayTech;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=GauDan\\GAUDAN;Database=PlayTech;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Computer>(entity =>
         {
-            entity.HasKey(e => e.ComputerId).HasName("PK__Computer__0DBB973F139EDE75");
+            entity.HasKey(e => e.ComputerId).HasName("PK__Computer__0DBB973F8998965D");
 
             entity.Property(e => e.ComputerId).HasColumnName("computerID");
             entity.Property(e => e.ComputerName)
@@ -47,7 +47,7 @@ public partial class PlayTechContext : DbContext
 
         modelBuilder.Entity<CurrentComputer>(entity =>
         {
-            entity.HasKey(e => new { e.UserId, e.ComputerId }).HasName("PK__CurrentC__2B41A5AC62858333");
+            entity.HasKey(e => new { e.UserId, e.ComputerId }).HasName("PK__CurrentC__2B41A5AC3E6CB613");
 
             entity.ToTable("CurrentComputer");
 
@@ -70,7 +70,7 @@ public partial class PlayTechContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__Orders__0809337D649E60C5");
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__0809337DD04A866D");
 
             entity.Property(e => e.OrderId).HasColumnName("orderID");
             entity.Property(e => e.OrderDate)
@@ -93,7 +93,7 @@ public partial class PlayTechContext : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__Products__2D10D14A2457550D");
+            entity.HasKey(e => e.ProductId).HasName("PK__Products__2D10D14A40134268");
 
             entity.Property(e => e.ProductId).HasColumnName("productID");
             entity.Property(e => e.ProductImg)
@@ -111,7 +111,7 @@ public partial class PlayTechContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__CB9A1CDF200BAAD7");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__CB9A1CDF725CBB6F");
 
             entity.Property(e => e.UserId).HasColumnName("userID");
             entity.Property(e => e.UserAvatar)

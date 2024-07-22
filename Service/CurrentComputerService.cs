@@ -27,6 +27,8 @@ namespace Service
 
         public ObservableCollection<CurrentComputer> GetCurrentComputerByUserID(int userID) => iCurrentComputerRepository.GetCurrentComputerByUserID(userID);
 
-        public ObservableCollection<CurrentComputer> GetCurrentComputerByComputerID(int computerId) => iCurrentComputerRepository.GetCurrentComputerByComputerID(computerId);  
+        public ObservableCollection<CurrentComputer> GetCurrentComputerByComputerID(int computerId) => iCurrentComputerRepository.GetCurrentComputerByComputerID(computerId);
+        public void DeleteCurrentComputerByUserID(int userID) => iCurrentComputerRepository.GetCurrentComputerByUserID(userID);
+        public void DeleteCurrentComputerByComputerID(int computerID) => iCurrentComputerRepository.GetCurrentComputerByComputerID(computerID);
     }
 }

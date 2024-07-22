@@ -14,6 +14,7 @@ namespace Wpf.MVVM.ViewModel
     {
         private readonly IProductService _productService;
         private ObservableCollection<Product> products;
+        private readonly IOrderService _orderService;
 
         public ObservableCollection<Product> Products
         {
@@ -33,6 +34,7 @@ namespace Wpf.MVVM.ViewModel
         public A_ProductsViewModel(IProductService productService)
         {
             _productService = productService;
+            _orderService = new OrderService();
             loadProduct();
         }
 
@@ -71,6 +73,7 @@ namespace Wpf.MVVM.ViewModel
 
         public void deleteProduct(Product product)
         {
+            _orderService.DeleteOrderByProductID(product.ProductId);
             _productService.DeleteProduct(product);
             loadProduct();
         }

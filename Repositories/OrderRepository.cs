@@ -21,5 +21,9 @@ namespace Repositories
         public void DeleteOrder(Order or) => OrderDAO.DeleteOrder(or);
 
         public Order GetOrderById(int id) => OrderDAO.GetOrderById(id);
+
+        public void DeleteOrderByUserID(int userID) => OrderDAO.DeleteOrderByUserID(userID);
+
+        public void DeleteOrderByProductID(int productID) => OrderDAO.DeleteOrderByProductID(productID);
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -105,6 +106,30 @@ namespace Wpf.MVVM.View
             throw new NotImplementedException();
         }
     }
+
+    public class ImageConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string workingDirectory = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+            if (value is string avatarPath)
+            {
+
+                if (File.Exists(projectDirectory + avatarPath))
+                {
+                    return new BitmapImage(new Uri(projectDirectory + avatarPath, UriKind.Absolute));
+                }
+            }
+            return new BitmapImage(new Uri(projectDirectory + "/Images/default.png", UriKind.Absolute));
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public partial class A_UsersView : UserControl
     {
         private A_UsersViewModel A_UsersViewModel;
@@ -113,15 +138,26 @@ namespace Wpf.MVVM.View
         {
             InitializeComponent();
             A_UsersViewModel = new A_UsersViewModel(new UserService(), new CurrentComputerService(), new ComputerService());
+            foreach(User user in A_UsersViewModel.Users)
+            {
+
+            }
             DataContext = A_UsersViewModel;
             cboFilter.SelectedValue = 4;
+        }
+
+        public void loadUserImage(User user)
+        {
+            string workingDirectory = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+            
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button button && button.DataContext is User user)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Confirm,
+                DialogResult result = MessageBox.Show($"Are you sure you want to delete {user.UserName}", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Confirm,
                                                    MessageBox.MessageBoxButton.Cancel);
                 if(result == DialogResult.Yes)
                 {
@@ -138,7 +174,13 @@ namespace Wpf.MVVM.View
             if(cUser.ShowDialog() == true)
             {
                 A_UsersViewModel.createUser(newUser);
+                MessageBox.Show("Create Success!", MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Confirm,
+                                                   MessageBox.MessageBoxButton.Cancel);
                 cboFilter.SelectedValue = 4;
+            }
+            else
+            {
+                A_UsersViewModel.loadUser();
             }
         }
 
@@ -151,6 +193,8 @@ namespace Wpf.MVVM.View
                 if(updateUser.ShowDialog() == true)
                 {
                     A_UsersViewModel.updateUser(currentUser);
+                    MessageBox.Show("Update Success!", MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Confirm,
+                                                   MessageBox.MessageBoxButton.Cancel);
                     cboFilter.SelectedValue = 4;
                 }
                 else

@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="ava.jpg" />
+    <None Remove="Images\avatar\638571985008791277.jpg" />
     <None Remove="Images\Background.png" />
     <None Remove="Images\Background2.png" />
     <None Remove="Images\BackgroundLogin.png" />
@@ -29,10 +30,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\avatar\638571985008791277.jpg" />
     <Resource Include="Images\Background.png" />
     <Resource Include="Images\Background2.png" />
     <Resource Include="Images\BackgroundLogin.png" />
-    <Resource Include="Images\default.png" />
+    <Resource Include="Images\default.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\MessageBox.png" />
     <Resource Include="Images\MessageBoxTitleGreen.png" />
     <Resource Include="Images\NavbarBackground.png" />

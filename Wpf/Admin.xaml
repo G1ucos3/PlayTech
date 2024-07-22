@@ -49,10 +49,12 @@
 
                 <Ellipse Width="100" Height="100">
                     <Ellipse.Fill>
-                        <ImageBrush RenderOptions.BitmapScalingMode="HighQuality" ImageSource="Images/default.png"/>
+                        <ImageBrush x:Name="avatar"  RenderOptions.BitmapScalingMode="HighQuality" ImageSource="/Images/default.png"/>
                     </Ellipse.Fill>
                 </Ellipse>
+                <TextBox x:Name="txtUserID" Visibility="Collapsed"/>
                 <TextBlock FontSize="18" FontWeight="Bold" TextAlignment="Center"
+                           x:Name="txtUsername"
                            Foreground="White" Text="A D. Min"
                            HorizontalAlignment="Center" Margin="0 10 0 0"/>
                 <TextBlock FontFamily="Helvetica" FontSize="16" Text="Admin" FontWeight="SemiBold"

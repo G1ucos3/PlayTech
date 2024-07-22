@@ -2,8 +2,10 @@
 using Microsoft.IdentityModel.Tokens;
 using Service;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,13 +19,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Brushes = System.Windows.Media.Brushes;
 using TextBox = System.Windows.Controls.TextBox;
+using Path = System.IO.Path;
+using Wpf.MVVM.View;
 
 namespace Wpf
 {
-    /// <summary>
-    /// Interaction logic for Login.xaml
-    /// </summary>
-    public partial class Login : Window, INotifyPropertyChanged
+        public partial class Login : Window, INotifyPropertyChanged
     {
         private readonly IUserService _userService;
         public User CurrentUser { get; set; }
@@ -58,7 +59,7 @@ namespace Wpf
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             string userEmail = email.Text;
-            string userPassword = passwordBox.Password;
+            string userPassword = hiddenPasswordBox.Text;
             var currentUser = _userService.GetUserByEmail(userEmail);
             if (currentUser != null)
             {
@@ -68,6 +69,14 @@ namespace Wpf
                     {
                         MessageBox.Show("Welcome back Admin!", MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Confirm, MessageBox.MessageBoxButton.No);
                         var admin = new Admin();
+                        admin.txtUserID.Text = currentUser.UserId.ToString();
+                        admin.txtUsername.Text = currentUser.UserName;
+                        var converter = new ImageSourceConverter();
+                        //MessageBox.Show(currentUser.UserAvatar, MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Confirm, MessageBox.MessageBoxButton.No);
+                        //admin.avatar.ImageSource = (ImageSource)converter.ConvertFromString("pack://application:,,," + currentUser.UserAvatar);
+                        string workingDirectory = Environment.CurrentDirectory;
+                        string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+                        admin.avatar.ImageSource = new BitmapImage(new Uri(projectDirectory + currentUser.UserAvatar, UriKind.Absolute));
                         admin.Show();
                         this.Close();
                     }
@@ -90,8 +99,8 @@ namespace Wpf
             }
             else
             {
-                DialogResult result = MessageBox.Show("Email not exist, register now?", MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Yes, MessageBox.MessageBoxButton.No);
-                if (result.Equals("Yes"))
+                DialogResult result = MessageBox.Show("Email not exist, register now?", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Yes, MessageBox.MessageBoxButton.No);
+                if (result == System.Windows.Forms.DialogResult.Yes)
                 {
                     var register = new Register();
                     register.Show();
@@ -141,7 +150,7 @@ namespace Wpf
         private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             hiddenPasswordBox.Text = passwordBox.Password;
-            if (hiddenPasswordBox.Text.IsNullOrEmpty()) bdPassword.Background = Brushes.Red;
+            if (hiddenPasswordBox.Text.IsNullOrEmpty() || hiddenPasswordBox.Text.Length < 8) bdPassword.Background = Brushes.Red;
             else bdPassword.Background = Brushes.White;
         }
 
@@ -150,6 +159,31 @@ namespace Wpf
             hiddenText.Text = email.Text;
             if (email.Text.IsNullOrEmpty()) bdEmail.Background = Brushes.Red;
             else bdEmail.Background = Brushes.White;
+        }
+
+        private void btnShow_Click(object sender, RoutedEventArgs e)
+        {
+            btnHide.Visibility = Visibility.Visible;
+            btnShow.Visibility = Visibility.Collapsed;
+            passwordBox.Visibility = Visibility.Visible;
+            showPasswordBox.Visibility = Visibility.Collapsed;
+            passwordBox.Password = showPasswordBox.Text;
+        }
+
+        private void btnHide_Click(object sender, RoutedEventArgs e)
+        {
+            btnHide.Visibility = Visibility.Collapsed;
+            btnShow.Visibility = Visibility.Visible;
+            passwordBox.Visibility = Visibility.Collapsed;
+            showPasswordBox.Visibility = Visibility.Visible;
+            showPasswordBox.Text = passwordBox.Password;
+        }
+
+        private void showPasswordBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            hiddenPasswordBox.Text = showPasswordBox.Text;
+            if (hiddenPasswordBox.Text.IsNullOrEmpty() || hiddenPasswordBox.Text.Length < 8) bdPassword.Background = Brushes.Red;
+            else bdPassword.Background = Brushes.White;
         }
     }
 }

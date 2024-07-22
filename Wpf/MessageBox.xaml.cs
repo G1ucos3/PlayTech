@@ -67,7 +67,7 @@ namespace Wpf
                     messageBox.bdMain.BorderBrush = Brushes.Green;
                     messageBox.msgIcon.Kind = PackIconKind.InformationOutline;
                     messageBox.iconMsg.Kind = PackIconKind.InfoCircle;
-                    messageBox.iconMsg.Foreground = Brushes.Blue;
+                    messageBox.iconMsg.Foreground = Brushes.Green;
                     messageBox.btnCancel.Visibility = Visibility.Collapsed;
                     messageBox.btnOk.SetValue(Grid.ColumnSpanProperty, 2);
                     break;
