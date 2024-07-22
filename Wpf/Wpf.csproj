@@ -10,10 +10,14 @@
 
   <ItemGroup>
     <None Remove="ava.jpg" />
+    <None Remove="Images\avatar\638571985008791277.jpg" />
     <None Remove="Images\Background.png" />
+    <None Remove="Images\Background2.png" />
     <None Remove="Images\BackgroundLogin.png" />
+    <None Remove="Images\default.png" />
     <None Remove="Images\MessageBox.png" />
     <None Remove="Images\MessageBoxTitleGreen.png" />
+    <None Remove="Images\NavbarBackground.png" />
     <None Remove="Images\PlayTechIcon.png" />
     <None Remove="Images\Slogan.png" />
   </ItemGroup>
@@ -26,16 +30,35 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\avatar\638571985008791277.jpg" />
     <Resource Include="Images\Background.png" />
+    <Resource Include="Images\Background2.png" />
     <Resource Include="Images\BackgroundLogin.png" />
+    <Resource Include="Images\default.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\MessageBox.png" />
     <Resource Include="Images\MessageBoxTitleGreen.png" />
+    <Resource Include="Images\NavbarBackground.png" />
     <Resource Include="Images\PlayTechIcon.png" />
     <Resource Include="Images\Slogan.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="MVVM\Model\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessObjects\BusinessObjects.csproj" />
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
+    <ProjectReference Include="..\Repositories\Repositories.csproj" />
+    <ProjectReference Include="..\Service\Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

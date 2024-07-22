@@ -1,19 +1,26 @@
 ﻿using System;
 using Wpf.Core;
+using Wpf.MVVM.View;
+using Service;
 
 namespace Wpf.MVVM.ViewModel
 {
     class MainViewModel : ObservableObject
     {
-        public RelayCommand HomeViewCommand { get; set; }
-        public RelayCommand DiscoveryViewCommand { get; set; }
-        public RelayCommand FeatureViewCommand { get; set; }
+        public RelayCommand A_UsersCommand { get; set; }
+        public RelayCommand A_ComputersCommand { get; set; }
+        public RelayCommand A_ProductsCommand { get; set; }
+        public RelayCommand M_UsersCommand { get; set; }
+        public RelayCommand M_OrdersCommand { get; set; }
 
-        public HomeViewModel HomeVM { get; set; }
-        public DiscoveryViewModel DiscoveryVM { get; set; }
-        public FeatureViewModel FeatureVM { get; set; }
+        public A_ComputersViewModel A_ComputersVM { get; set; }
+        public A_ProductsViewModel A_ProductsVM { get; set; }
+        public A_UsersViewModel A_UsersVM { get; set; }
+        public M_UsersViewModel M_UsersVM { get; set; }
+        public M_OrdersViewModel M_OrdersVM { get; set; }
 
         private object _currentView;
+        private object m_currentView;
 
         public object CurrentView
         {
@@ -25,27 +32,51 @@ namespace Wpf.MVVM.ViewModel
             }
         }
 
+        public object M_CurrentView
+        {
+            get { return m_currentView; }
+            set
+            {
+                m_currentView = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public MainViewModel()
         {
-            HomeVM = new HomeViewModel();
-            DiscoveryVM = new DiscoveryViewModel();
-            FeatureVM = new FeatureViewModel();
-            CurrentView = HomeVM;
+            A_ComputersVM = new A_ComputersViewModel(new UserService(), new CurrentComputerService(), new ComputerService());
+            A_ProductsVM = new A_ProductsViewModel(new ProductService());
+            A_UsersVM = new A_UsersViewModel(new UserService(), new CurrentComputerService(), new ComputerService());
+            CurrentView = A_UsersVM;
 
-            HomeViewCommand = new RelayCommand(o =>
+            M_UsersVM = new M_UsersViewModel(new UserService(), new CurrentComputerService(), new ComputerService());
+            M_OrdersVM = new M_OrdersViewModel(new UserService(), new OrderService(), new ProductService());
+            M_CurrentView = M_UsersVM;
+
+            A_UsersCommand = new RelayCommand(o =>
             {
-                CurrentView = HomeVM;
+                CurrentView = A_UsersVM;
             });
 
-            DiscoveryViewCommand = new RelayCommand(o =>
+            A_ComputersCommand = new RelayCommand(o =>
             {
-                CurrentView = DiscoveryVM;
+                CurrentView = A_ComputersVM;
             });
 
-            FeatureViewCommand = new RelayCommand(o =>
+            A_ProductsCommand = new RelayCommand(o =>
             {
-                CurrentView = FeatureVM;
+                CurrentView = A_ProductsVM;
+            });
+
+            M_UsersCommand = new RelayCommand(o =>
+            {
+                M_CurrentView = M_UsersVM;
+            });
+
+            M_OrdersCommand = new RelayCommand(o =>
+            {
+                M_CurrentView = M_OrdersVM;
             });
         }
     }

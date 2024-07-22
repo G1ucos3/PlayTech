@@ -1,0 +1,213 @@
+﻿<UserControl x:Class="Wpf.MVVM.View.A_UsersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:Wpf.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="800">
+    <Grid>
+
+        <StackPanel Margin="30 12 0 0">
+            <StackPanel.Resources>
+                <local:RoleConverter x:Key="roleConverter"/>
+                <local:ComputerConverter x:Key="computerConverter"/>
+                <local:ImageConverter x:Key="avatarConverter"/>
+            </StackPanel.Resources>
+
+                <DockPanel Margin="0 12 5 0">
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
+                           FontSize="15" FontWeight="Bold" Foreground="White" Text="All Users"/>
+                <TextBlock Text="{Binding Source={x:Static sys:DateTime.Today},   
+                           StringFormat='{}{0:dddd, MMMM dd, yyyy}'}" Foreground="LightGray" FontSize="12"
+                           FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right"
+                           DockPanel.Dock="Right" Margin="0 0 20 0"/>
+            </DockPanel>
+
+            <DockPanel Margin="0 35 0 0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0" Background="LightGray" Height="100" 
+                            CornerRadius="15" Margin="0 0 30 0">
+                        <StackPanel>
+                            <TextBlock Text="Total Users" FontSize="24" FontWeight="SemiBold"
+                                       Foreground="Black" HorizontalAlignment="Left"
+                                       VerticalAlignment="Top" Margin="15 15 0 0"/>
+                            <WrapPanel Width="170">
+                                <materialDesign:PackIcon Kind="AccountGroup" VerticalAlignment="Center"
+                                                         Margin="0 0 10 0" Foreground="DarkBlue"
+                                                         Height="30" Width="30"/>
+                                <TextBlock Foreground="Black" FontSize="25" FontWeight="Bold" Text="{Binding TotalUsers}"/>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Border>
+
+
+                    <Border Grid.Column="1" Background="LightGray" Height="100" 
+                            CornerRadius="15" Margin="0 0 30 0">
+                        <StackPanel>
+                            <TextBlock Text="Total Managers" FontSize="24" FontWeight="SemiBold"
+                                       Foreground="Black" HorizontalAlignment="Left"
+                                       VerticalAlignment="Top" Margin="15 15 0 0"/>
+                            <WrapPanel Width="170">
+                                <materialDesign:PackIcon Kind="AccountGroup" VerticalAlignment="Center"
+                                                         Margin="0 0 10 0" Foreground="LimeGreen"
+                                                         Height="30" Width="30"/>
+                                <TextBlock Foreground="Black" FontSize="25" FontWeight="Bold" Text="{Binding TotalManagers}"/> 
+                            </WrapPanel>
+                        </StackPanel>
+                    </Border>
+
+
+                    <Border Grid.Column="2" Background="LightGray" Height="100" 
+                            CornerRadius="15" Margin="0 0 30 0">
+                        <StackPanel>
+                            <TextBlock Text="Total Gamers" FontSize="24" FontWeight="SemiBold"
+                                       Foreground="Black" HorizontalAlignment="Left"
+                                       VerticalAlignment="Top" Margin="15 15 0 0"/>
+                            <WrapPanel Width="170">
+                                <materialDesign:PackIcon Kind="AccountGroup" VerticalAlignment="Center"
+                                                         Margin="0 0 10 0" Foreground="DarkGoldenrod"
+                                                         Height="30" Width="30"/>
+                                <TextBlock Foreground="Black" FontSize="25" FontWeight="Bold" Text="{Binding TotalGamers}"/>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </DockPanel>
+            <DockPanel Margin="0 20 30 0">
+                <TextBlock Text="Filter by" FontSize="13" FontWeight="SemiBold" 
+                           Foreground="White" HorizontalAlignment="Left" 
+                           VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <ComboBox Padding="10 0 0 0" Background="LightGray" Width="120" HorizontalAlignment="Left" 
+                          Style="{DynamicResource theComboBox}"
+                          x:Name="cboFilter"
+                          SelectionChanged="cboFilter_SelectionChanged"
+                          SelectedValuePath="Tag"
+                          ItemContainerStyle="{DynamicResource theComboBoxItem}"
+                          Height="30">
+                    <ComboBoxItem Content="All Users" Tag="4"/>
+                    <ComboBoxItem Content="Managers" Tag="2"/>
+                    <ComboBoxItem Content="Gamers" Tag="3"/>
+                </ComboBox>
+
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                        materialDesign:RippleAssist.Feedback="White" Background="#FF4E4C4C"
+                        x:Name="addCurrentComputer"
+                        Click="addCurrentComputer_Click"
+                        Foreground="LightGray" materialDesign:ButtonAssist.CornerRadius="6"
+                        Margin="40 0 30 0" Width="120" Height="35">
+                    <WrapPanel>
+                        <materialDesign:PackIcon Kind="Plus" VerticalAlignment="Center"
+                                                 Foreground="White"
+                                                 Height="20" Width="20"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="11" FontFamily="Helvetica"
+                                   HorizontalAlignment="Right">
+                                Add current computer
+                        </TextBlock>
+                    </WrapPanel>
+                </Button>
+
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                        materialDesign:RippleAssist.Feedback="White" Background="#FF4E4C4C"
+                        x:Name="deleteAllCurrentComputer"
+                        Click="deleteAllCurrentComputer_Click"
+                        VerticalAlignment="Center"
+                        Foreground="LightGray" materialDesign:ButtonAssist.CornerRadius="6"
+                         Width="150" Height="35">      
+                    <WrapPanel>
+                        <materialDesign:PackIcon Kind="Minus" VerticalAlignment="Center"
+                                                 Foreground="White"
+                                                 Height="20" Width="20"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="11" FontFamily="Helvetica"
+                                   HorizontalAlignment="Right">
+                                Delete all current computer
+                        </TextBlock>
+                    </WrapPanel>
+                </Button>
+
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                        materialDesign:RippleAssist.Feedback="White" Background="#FF4E4C4C"
+                        Foreground="LightGray" materialDesign:ButtonAssist.CornerRadius="6"
+                        x:Name="btnCreate"
+                        Click="btnCreate_Click"
+                        Width="auto" Height="35" HorizontalAlignment="Right">   
+                    <WrapPanel>
+                        <materialDesign:PackIcon Kind="PlusThick" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                        <TextBlock Text="Add new user"/>
+                    </WrapPanel>
+                </Button>
+            </DockPanel>
+
+            <Separator Height="1" Background="LightGray" Margin="0 10 30 10"/>
+            <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                      ItemsSource="{Binding Users}" 
+                      RowStyle="{DynamicResource DataGridRowStyle1}" Margin="0 20 30 0" x:Name="userDataGrid">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="userID" Header="ID" IsReadOnly="True" Width="auto" Binding="{Binding UserId}"/>
+
+                    <DataGridTemplateColumn Header="User" IsReadOnly="True" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Ellipse Width="30" Height="30" Margin="0 0 10 0">
+                                        <Ellipse.Fill>
+                                            <ImageBrush x:Name="userAvatar" RenderOptions.BitmapScalingMode="HighQuality" ImageSource="{Binding UserAvatar, Converter={StaticResource avatarConverter}}"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                    <TextBlock Text="{Binding UserName}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTextColumn Header="Email" IsReadOnly="True" Width="auto" Binding="{Binding UserEmail}"/>
+
+                    <DataGridTextColumn Header="Password" IsReadOnly="True" Width="auto" Binding="{Binding UserPassword}" Visibility="Collapsed"/>
+
+
+                    <DataGridTemplateColumn Header="Computer" IsReadOnly="True" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding CurrentComputers, Converter={StaticResource computerConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTextColumn Header="Roles" IsReadOnly="True" Width="*" Binding="{Binding UserRoles, Converter={StaticResource roleConverter}}"/>
+                    <DataGridTemplateColumn Header="Operations"  IsReadOnly="True" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Style="{StaticResource gridEditButton}" Margin="8 0 0 0" 
+                                            x:Name="btnEdit"
+                                            Click="btnEdit_Click"
+                                            Visibility="{Binding UserRoles}">
+                                        <materialDesign:PackIcon Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+                                    <Button Style="{StaticResource gridRemoveButton}" Margin="8 0 0 0"
+                                            x:Name="btnDelete"
+                                            Click="btnDelete_Click"
+                                            Visibility="{Binding UserRoles}">
+                                        <materialDesign:PackIcon Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</UserControl>

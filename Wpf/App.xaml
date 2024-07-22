@@ -9,21 +9,35 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Theme/ModernButton.xaml"/>
-                <ResourceDictionary Source="/Theme/ModernBorder.xaml"/>
                 <ResourceDictionary Source="/Theme/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="/Theme/TextBoxTheme.xaml"/>
+                <ResourceDictionary Source="/Theme/ModernCombobox.xaml"/>
+                <ResourceDictionary Source="/Theme/ModernDataGrid.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Secondary/MaterialDesignColor.Blue.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
-                <view:HomeView/>
+            <DataTemplate DataType="{x:Type viewModel:A_UsersViewModel}">
+                <view:A_UsersView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModel:DiscoveryViewModel}">
-                <view:DiscoveryView/>
+            <DataTemplate DataType="{x:Type viewModel:A_ComputersViewModel}">
+                <view:A_ComputersView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModel:FeatureViewModel}">
-                <view:FeatureView/>
+            <DataTemplate DataType="{x:Type viewModel:A_ProductsViewModel}">
+                <view:A_ProductsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:M_UsersViewModel}">
+                <view:M_UsersView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:M_OrdersViewModel}">
+                <view:M_OrdersView/>
             </DataTemplate>
 
         </ResourceDictionary>

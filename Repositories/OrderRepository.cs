@@ -1,0 +1,29 @@
+﻿using BusinessObjects;
+using DataAccessLayer;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Repositories
+{
+    public class OrderRepository : IOrderRepository
+    {
+
+        public ObservableCollection<Order> GetOrder() => OrderDAO.GetOrder();
+
+        public void SaveOrder(Order or) => OrderDAO.SaveOrder(or);
+
+        public void UpdateOrder(Order or) => OrderDAO.UpdateOrder(or);
+
+        public void DeleteOrder(Order or) => OrderDAO.DeleteOrder(or);
+
+        public Order GetOrderById(int id) => OrderDAO.GetOrderById(id);
+
+        public void DeleteOrderByUserID(int userID) => OrderDAO.DeleteOrderByUserID(userID);
+
+        public void DeleteOrderByProductID(int productID) => OrderDAO.DeleteOrderByProductID(productID);
+    }
+}

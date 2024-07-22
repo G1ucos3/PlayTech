@@ -7,29 +7,41 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
-                        <Grid VerticalAlignment="Stretch"
-                              HorizontalAlignment="Stretch"
+                        <Border 
+                              Height="40"
+                              CornerRadius="10"
                               Background="{TemplateBinding Background}">
-
-                            <TextBlock VerticalAlignment="Center"
-                                       Text="{TemplateBinding Property=Content}"
-                                       Margin="15 0 0 0">
                                 
+                            <TextBlock VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Text="{TemplateBinding Property=Content}"
+                                       FontSize="20"
+                                       FontWeight="Bold"
+                                       FontFamily="Helvetica">
                             </TextBlock>
-                        </Grid>
+                        </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-
+            
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
         </Style.Setters>
 
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="#22202f"/>
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Opacity" Value="0.8"/>
+                <Setter Property="Foreground" Value="Black"/>
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Opacity" Value="0.8"/>
+                <Setter Property="Foreground" Value="Black"/>
             </Trigger>
         </Style.Triggers>
-        
+
     </Style>
 </ResourceDictionary>
