@@ -57,7 +57,7 @@ namespace Wpf
 
         private void btnlogout_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.DialogResult result = MessageBox.Show("Are you sure?", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Yes,
+            System.Windows.Forms.DialogResult result = MessageBox.Show("Log out?", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Yes,
                                                     MessageBox.MessageBoxButton.No);
             if (result == System.Windows.Forms.DialogResult.Yes)
             {

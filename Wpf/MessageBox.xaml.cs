@@ -41,7 +41,6 @@ namespace Wpf
         {
             Error,
             Info,
-            Warning,
             Confirm
         }
 
@@ -68,12 +67,6 @@ namespace Wpf
                     messageBox.msgIcon.Kind = PackIconKind.InformationOutline;
                     messageBox.iconMsg.Kind = PackIconKind.InfoCircle;
                     messageBox.iconMsg.Foreground = Brushes.Green;
-                    messageBox.btnCancel.Visibility = Visibility.Collapsed;
-                    messageBox.btnOk.SetValue(Grid.ColumnSpanProperty, 2);
-                    break;
-                case MessageBoxTittle.Warning:
-                    messageBox.iconMsg.Kind = PackIconKind.Warning;
-                    messageBox.iconMsg.Foreground = Brushes.Yellow;
                     messageBox.btnCancel.Visibility = Visibility.Collapsed;
                     messageBox.btnOk.SetValue(Grid.ColumnSpanProperty, 2);
                     break;

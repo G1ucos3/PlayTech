@@ -95,9 +95,9 @@ namespace Wpf.MVVM.View
         private void btnCheck_Click(object sender, RoutedEventArgs e)
         {
 
-            if (sender is Button button && button.DataContext is Order order)
+            if (sender is Button button && button.DataContext is Order order /*&& order.OrderStatus == false*/)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Confirm,
+                DialogResult result = MessageBox.Show("Check order?", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Confirm,
                                                    MessageBox.MessageBoxButton.Cancel);
                 if (result == DialogResult.Yes)
                 {
@@ -112,7 +112,7 @@ namespace Wpf.MVVM.View
         {
             if (sender is Button button && button.DataContext is Order order && order.OrderStatus == true)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Confirm,
+                DialogResult result = MessageBox.Show("Delete order?", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Confirm,
                                                    MessageBox.MessageBoxButton.Cancel);
                 if (result == DialogResult.Yes)
                 {
