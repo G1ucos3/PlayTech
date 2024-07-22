@@ -52,9 +52,9 @@
                     </Ellipse.Fill>
                 </Ellipse>
                 <TextBlock FontSize="18" FontWeight="Bold" TextAlignment="Center"
-                        Foreground="White" Text="Anh Minh Hoang"
+                        Foreground="White" Text=""
                         HorizontalAlignment="Center" Margin="0 10 0 0"/>
-                <TextBlock FontFamily="Helvetica" FontSize="16" Text="Admin" FontWeight="SemiBold"
+                <TextBlock FontFamily="Helvetica" FontSize="16" Text="" FontWeight="SemiBold"
                         TextAlignment="Center" HorizontalAlignment="Center" Foreground="LightGray"
                         Margin="0 10 0 0"/>
                 <Button Style="{StaticResource MaterialDesignFlatButton}"
@@ -95,19 +95,7 @@
                     </WrapPanel>
                 </RadioButton>
 
-                <!--<RadioButton Style="{StaticResource MaterialDesignFlatButton}"
-                          Foreground="{DynamicResource MaterialDesign.Brush.Primary.Dark.Foreground}"
-                          x:Name="btnProducts" Click="btnProducts_Click"
-                          Command="{Binding A_ProductsCommand}"
-                          materialDesign:ButtonAssist.CornerRadius="6" Width="auto"
-                          Height="40" materialDesign:RippleAssist.Feedback="White" Margin="0 0 0 15">
-                    <WrapPanel Width="170">
-                        <materialDesign:PackIcon Kind="Food" VerticalAlignment="Center"
-                                              Margin="0 0 20 0" Foreground="White"
-                                              Height="20" Width="20"/>
-                        <TextBlock Foreground="White" FontSize="15" FontFamily="Helvetica">Products</TextBlock>
-                    </WrapPanel>
-                </RadioButton>-->
+          
             </StackPanel>
         </materialDesign:ColorZone>
 
