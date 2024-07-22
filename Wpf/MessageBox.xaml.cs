@@ -71,11 +71,11 @@ namespace Wpf
                     messageBox.btnOk.SetValue(Grid.ColumnSpanProperty, 2);
                     break;
                 case MessageBoxTittle.Confirm:
-                    messageBox.bdTitle.Background = Brushes.Purple;
-                    messageBox.bdMain.BorderBrush = Brushes.Purple;
+                    messageBox.bdTitle.Background = Brushes.YellowGreen;
+                    messageBox.bdMain.BorderBrush = Brushes.YellowGreen;
                     messageBox.msgIcon.Kind = PackIconKind.QuestionMark;
                     messageBox.iconMsg.Kind = PackIconKind.HelpCircle;
-                    messageBox.iconMsg.Foreground = Brushes.Purple;
+                    messageBox.iconMsg.Foreground = Brushes.YellowGreen;
                     break;
             }
             messageBox.ShowDialog();

@@ -70,7 +70,7 @@ namespace Wpf
             string userName = txtUsername.Text;
             string email = txtEmail.Text;
             string userPassword = hiddenPasswordBox.Text;
-            string confirmPass = hiddenPasswordBox.Text;
+            string confirmPass = hiddenConfirmPasswordBox.Text;
             if(_userService.GetUserByEmail(email) != null)
             {
                 DialogResult result = MessageBox.Show("Email already exist! Login now?", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Yes, MessageBox.MessageBoxButton.No);
