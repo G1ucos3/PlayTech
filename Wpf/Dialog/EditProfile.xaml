@@ -22,16 +22,25 @@
             </Grid.RowDefinitions>
             
             <StackPanel Orientation="Horizontal" Margin="0,0,0,36">
-                <Grid Height="222">
-                    <Ellipse Width="100" Height="100" Margin="15 30 0 70">
+                <StackPanel>
+                    <Ellipse Width="100" Height="100" Margin="15 30 0 0">
                         <Ellipse.Fill>
                             <ImageBrush x:Name="userAvatar" RenderOptions.BitmapScalingMode="HighQuality" ImageSource="{Binding CurrentUser.UserAvatar}" Opacity="0.8"/>
                         </Ellipse.Fill>
                     </Ellipse>
-                    <Button Background="Transparent" BorderThickness="0"  Margin="20 0 5 40" x:Name="btnImage" Click="btnImage_Click">
-                        <materialDesign:PackIcon Kind="Edit" Name="icon" Foreground="Black"/>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            materialDesign:RippleAssist.Feedback="White" Background="#FF4E4C4C"
+                            Foreground="LightGray" materialDesign:ButtonAssist.CornerRadius="6"
+                            x:Name="btnImage"
+                            Margin="10 10 0 0"
+                            Click="btnImage_Click"
+                            Width="auto" Height="25" HorizontalAlignment="Center">
+                        <WrapPanel>
+                            <materialDesign:PackIcon Kind="Image" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                            <TextBlock Text="Change Image" FontSize="12"/>
+                        </WrapPanel>
                     </Button>
-                </Grid>
+                </StackPanel>
 
                 <StackPanel Margin="20,10,10,0" DockPanel.Dock="Right">
                     <TextBlock HorizontalAlignment="Left" FontSize="20" TextDecorations="Underline" FontWeight="Bold" Foreground="White" Margin="0 0 0 10">

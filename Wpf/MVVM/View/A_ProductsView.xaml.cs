@@ -23,6 +23,23 @@ using UserControl = System.Windows.Controls.UserControl;
 
 namespace Wpf.MVVM.View
 {
+    public class VndCurrencyConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is int price)
+            {
+                return price.ToString("C0", CultureInfo.CreateSpecificCulture("vi-VN"));
+            }
+            return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public partial class A_ProductsView : UserControl
     {
         private A_ProductsViewModel a_ProductsViewModel;

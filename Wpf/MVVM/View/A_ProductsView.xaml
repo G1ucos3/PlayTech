@@ -12,6 +12,7 @@
         <StackPanel Margin="30 12 0 0">
             <StackPanel.Resources>
                 <local:ImageConverter x:Key="productImgConverter"/>
+                <local:VndCurrencyConverter x:Key="currencyConvert"/>
             </StackPanel.Resources>
             <DockPanel Margin="0 12 5 0">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -73,7 +74,7 @@
                     </DataGridTemplateColumn>
 
 
-                    <DataGridTextColumn Header="Price" IsReadOnly="True" Width="*" Binding="{Binding ProductPrice}"/>
+                    <DataGridTextColumn Header="Price" IsReadOnly="True" Width="*" Binding="{Binding ProductPrice, Converter={StaticResource currencyConvert}}"/>
                     <DataGridTextColumn Header="Quantity" IsReadOnly="True" Width="*" Binding="{Binding ProductQuantity}"/>
                     <DataGridTextColumn Header="Type" IsReadOnly="True" Width="*" Binding="{Binding ProductType}"/>
 

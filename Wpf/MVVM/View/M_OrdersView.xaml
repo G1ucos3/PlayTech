@@ -15,6 +15,7 @@
                 <local:OrderProductConverter x:Key="oproductConverter"/>
                 <local:OrderStatusConverter x:Key="ostatusConverter"/>
                 <local:ImageConverter x:Key="imageConverter"/>
+                <local:VndCurrencyConverter x:Key="currencyConvert"/>
             </StackPanel.Resources>
 
             <DockPanel Margin="0 12 5 0">
@@ -78,6 +79,14 @@
                                     </Ellipse>
                                     <TextBlock Text="{Binding Product, Converter={StaticResource oproductConverter}}"/>
                                 </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Price" IsReadOnly="True" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Product.ProductPrice, Converter={StaticResource currencyConvert}}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

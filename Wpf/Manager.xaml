@@ -7,7 +7,7 @@
              xmlns:viewModel="clr-namespace:Wpf.MVVM.ViewModel"
      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
      mc:Ignorable="d"
-     Height="700" Width="1000" WindowStyle="None"
+     Height="700" Width="1100" WindowStyle="None"
      ResizeMode="NoResize"
      Background="Transparent"
      AllowsTransparency="True"
