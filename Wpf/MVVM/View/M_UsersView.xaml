@@ -32,9 +32,9 @@
               RowStyle="{DynamicResource DataGridRowStyle1}" Margin="0 20 30 0" x:Name="userDataGrid">
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" IsReadOnly="True" Width="auto" Binding="{Binding UserId}"/>
+                    <DataGridTextColumn Header="ID" IsReadOnly="True" Width="*" Binding="{Binding UserId}"/>
 
-                    <DataGridTemplateColumn Header="User" IsReadOnly="True" Width="auto">
+                    <DataGridTemplateColumn Header="User" IsReadOnly="True" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -49,7 +49,7 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTextColumn Header="Email" IsReadOnly="True" Width="auto" Binding="{Binding UserEmail}"/>
+                    <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*" Binding="{Binding UserEmail}"/>
 
                     <DataGridTextColumn Header="Password" IsReadOnly="True" Width="*" Binding="{Binding UserPassword}" Visibility="Collapsed"/>
 

@@ -60,6 +60,8 @@
                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                      materialDesign:RippleAssist.Feedback="White" Background="#FF4E4C4C"
                      Foreground="LightGray" materialDesign:ButtonAssist.CornerRadius="6"
+                        x:Name="btnEditUser"
+                        Click="btnEditUser_Click"
                      Margin="0 10 0 20" Width="auto" Height="35" HorizontalAlignment="Center">
                     <WrapPanel>
                         <materialDesign:PackIcon Kind="Edit" VerticalAlignment="Center" Margin="0 0 10 0"/>
@@ -94,20 +96,6 @@
                         <TextBlock Foreground="White" FontSize="15" FontFamily="Helvetica">Orders</TextBlock>
                     </WrapPanel>
                 </RadioButton>
-
-                <!--<RadioButton Style="{StaticResource MaterialDesignFlatButton}"
-                          Foreground="{DynamicResource MaterialDesign.Brush.Primary.Dark.Foreground}"
-                          x:Name="btnProducts" Click="btnProducts_Click"
-                          Command="{Binding A_ProductsCommand}"
-                          materialDesign:ButtonAssist.CornerRadius="6" Width="auto"
-                          Height="40" materialDesign:RippleAssist.Feedback="White" Margin="0 0 0 15">
-                    <WrapPanel Width="170">
-                        <materialDesign:PackIcon Kind="Food" VerticalAlignment="Center"
-                                              Margin="0 0 20 0" Foreground="White"
-                                              Height="20" Width="20"/>
-                        <TextBlock Foreground="White" FontSize="15" FontFamily="Helvetica">Products</TextBlock>
-                    </WrapPanel>
-                </RadioButton>-->
             </StackPanel>
         </materialDesign:ColorZone>
 

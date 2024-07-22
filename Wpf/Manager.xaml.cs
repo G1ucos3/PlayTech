@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Service;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,8 +19,9 @@ namespace Wpf
     /// <summary>
     /// Interaction logic for Manager.xaml
     /// </summary>
-    public partial class Manager : Window
+    public partial class Manager : Window, INotifyPropertyChanged
     {
+        private IUserService _userService;
         public Manager()
         {
             InitializeComponent();
@@ -46,6 +49,17 @@ namespace Wpf
                 login.Show();
                 this.Close();
             }
+        }
+
+        private void btnEditUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
