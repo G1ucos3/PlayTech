@@ -79,6 +79,8 @@ namespace Wpf.MVVM.View
             if(createComputer.ShowDialog() == true)
             {
                 A_ComputersViewModel.createComputer(newComputer);
+                MessageBox.Show("Create Success!", MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Confirm,
+                                                   MessageBox.MessageBoxButton.Cancel);
                 cboFilter.SelectedValue = 1;
             }
             
@@ -93,6 +95,8 @@ namespace Wpf.MVVM.View
                 if (updateComputer.ShowDialog() == true)
                 {
                     A_ComputersViewModel.updateComputer(currentComputer);
+                    MessageBox.Show("Update Success!", MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Confirm,
+                                                   MessageBox.MessageBoxButton.Cancel);
                     cboFilter.SelectedValue = 1;
                 }
                 else
@@ -106,7 +110,7 @@ namespace Wpf.MVVM.View
         {
             if (sender is Button button && button.DataContext is Computer computer)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Confirm,
+                DialogResult result = MessageBox.Show($"Are you sure you want to delete {computer.ComputerName}?", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Confirm,
                                                    MessageBox.MessageBoxButton.Cancel);
                 if (result == DialogResult.Yes)
                 {

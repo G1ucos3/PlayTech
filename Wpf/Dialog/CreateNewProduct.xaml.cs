@@ -17,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Brushes = System.Windows.Media.Brushes;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using Path = System.IO.Path;
 
@@ -157,6 +158,45 @@ namespace Wpf.Dialog
             {
                 MessageBox.Show("Image error", MessageBox.MessageBoxTittle.Error, MessageBox.MessageBoxButton.Ok, MessageBox.MessageBoxButton.Confirm);
             }
+        }
+
+        private void productname_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            hiddenProductName.Text = productName.Text;
+            if (hiddenProductName.Text.IsNullOrEmpty()) bdName.Background = Brushes.Red;
+            else bdName.Background = Brushes.White;
+        }
+
+        private void quantity_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (quantity.Text.IsNullOrEmpty()) quantity.Text = "0";
+            int n;
+            bool isNumeric = int.TryParse(quantity.Text, out n);
+            if (!isNumeric) quantity.Text = "0";
+            hiddenQuantity.Text = quantity.Text;
+            if(hiddenQuantity.Text.IsNullOrEmpty()) bdQuantity.Background = Brushes.Red;
+            else bdQuantity.Background = Brushes.White;
+            if (isNumeric && n <= 0) bdQuantity.Background = Brushes.Red;
+            else bdQuantity.Background = Brushes.White;
+        }
+
+        private void price_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (price.Text.IsNullOrEmpty()) price.Text = "0";
+            int n;
+            bool isNumeric = int.TryParse(price.Text, out n);
+            if (!isNumeric) price.Text = "0";
+            hiddenPrice.Text = price.Text;
+            if (hiddenPrice.Text.IsNullOrEmpty()) bdPrice.Background = Brushes.Red;
+            else bdPrice.Background = Brushes.White;
+            if (isNumeric && n <= 0) bdPrice.Background = Brushes.Red;
+            else bdPrice.Background = Brushes.White;
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
         }
     }
 }

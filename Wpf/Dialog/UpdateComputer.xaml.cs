@@ -1,4 +1,5 @@
 ﻿using BusinessObjects;
+using Microsoft.IdentityModel.Tokens;
 using Service;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Wpf.MVVM.View;
+using Brushes = System.Windows.Media.Brushes;
 
 namespace Wpf.Dialog
 {
@@ -91,7 +93,28 @@ namespace Wpf.Dialog
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             cbStatus.SelectedValue = CurrentComputer.ComputerStatus;
-            Console.WriteLine(CurrentComputer.ComputerStatus);
+            computerName.Text = hiddenComputerName.Text;
+            computerSpec.Text = hiddenComputerSpec.Text;
+        }
+
+        private void computerName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            hiddenComputerName.Text = computerName.Text;
+            if (hiddenComputerName.Text.IsNullOrEmpty()) bdName.Background = Brushes.Red;
+            else bdName.Background = Brushes.White;
+        }
+
+        private void computerSpec_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            hiddenComputerSpec.Text = computerSpec.Text;
+            if (hiddenComputerSpec.Text.IsNullOrEmpty()) bdSpec.Background = Brushes.Red;
+            else bdSpec.Background = Brushes.White;
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
         }
     }
 }

@@ -4,10 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf.Dialog"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         Loaded="Window_Loaded"
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
+        MouseDown="Window_MouseDown"
         WindowStartupLocation="CenterScreen"
         Height="400" Width="400">
 
@@ -20,13 +22,56 @@
                 <TextBlock HorizontalAlignment="Center" FontSize="20" TextDecorations="Underline" FontWeight="Bold" Foreground="White" Margin="0 0 0 10">
                     UPDATE COMPUTER
                 </TextBlock>
-                <Label Content="Computer Name" Foreground="White"/>
-                <TextBox x:Name="computerName" Foreground="White" BorderBrush="White" Text="{Binding CurrentComputer.ComputerName, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
-                <Label Content="{Binding ElementName=computerName, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
+                <Label Content="Computer Name" Foreground="White" Opacity="0.5"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="computerName" 
+            Foreground="White"  
+            Width="380"
+            BorderThickness="0"
+            TextChanged="computerName_TextChanged"/>
+                    <iconPacks:PackIconMaterial Kind="Laptop" 
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center"
+                                Foreground="White"/>
 
-                <Label Content="Computer Spec" Foreground="White"/>
-                <TextBox x:Name="computerSpec" Foreground="White" BorderBrush="White" Text="{Binding CurrentComputer.ComputerSpec, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
-                <Label Content="{Binding ElementName=computerSpec, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
+                </StackPanel>
+                <Border Width="400"
+                         Height="2"
+                         Background="White"
+                         x:Name="bdName"
+                         Margin="0 2 0 0"
+                         Opacity="0.5"/>
+                <TextBox x:Name="hiddenComputerName" 
+                         Foreground="White" 
+                         BorderBrush="White" 
+                         Visibility="Collapsed"
+                        Text="{Binding CurrentComputer.ComputerName, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
+                <Label Content="{Binding ElementName=hiddenComputerName, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red"/>
+
+                <Label Content="Computer Spec" Foreground="White" Opacity="0.5"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="computerSpec" 
+                            Foreground="White"  
+                            Width="380"
+                            BorderThickness="0"
+                            TextChanged="computerSpec_TextChanged"/>
+                    <iconPacks:PackIconMaterial Kind="CogOutline" 
+                                                VerticalAlignment="Center" 
+                                                HorizontalAlignment="Center"
+                                                Foreground="White"/>
+
+                </StackPanel>
+                <Border Width="400"
+                         Height="2"
+                         Background="White"
+                         x:Name="bdSpec"
+                         Margin="0 2 0 0"
+                         Opacity="0.5"/>
+                <TextBox x:Name="hiddenComputerSpec" 
+                        Foreground="White" BorderBrush="White" 
+                        Visibility="Collapsed"
+                        Text="{Binding CurrentComputer.ComputerSpec, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
+                <Label Content="{Binding ElementName=hiddenComputerSpec, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
 
                 <Label Content="Status" Margin="0 15 0 0" Foreground="White"/>
                 <ComboBox x:Name="cbStatus" Background="Transparent" Foreground="White" 
@@ -42,7 +87,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="110,218,110,-71">
-                <Button Content="Create" Command="{Binding SubmitCommand}" Focusable="True" Margin="5" Style="{StaticResource ModernButtonStyle}"
+                <Button Content="Update" Command="{Binding SubmitCommand}" Focusable="True" Margin="5" Style="{StaticResource ModernButtonStyle}"
                         Height="40" Width="80"/>
                 <Button Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" Margin="5" Style="{StaticResource ModernButtonStyle}"
                         Height="40" Width="80"/>
