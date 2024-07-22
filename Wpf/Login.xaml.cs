@@ -84,6 +84,12 @@ namespace Wpf
                     {
                         MessageBox.Show($"Welcome back {currentUser.UserName}", MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Confirm, MessageBox.MessageBoxButton.No);
                         var manager = new Manager();
+                        manager.txtUserID.Text = currentUser.UserId.ToString();
+                        manager.txtUsername.Text = currentUser.UserName;
+                        var converter = new ImageSourceConverter();
+                        string workingDirectory = Environment.CurrentDirectory;
+                        string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+                        manager.avatar.ImageSource = new BitmapImage(new Uri(projectDirectory + currentUser.UserAvatar, UriKind.Absolute));
                         manager.Show();
                         this.Close();
                     }
