@@ -11,8 +11,6 @@
     <Grid>
         <StackPanel Margin="30 12 0 0">
             <StackPanel.Resources>
-                <local:OrderUserConverter x:Key="ouserConverter"/>
-                <local:OrderProductConverter x:Key="oproductConverter"/>
                 <local:OrderStatusConverter x:Key="ostatusConverter"/>
                 <local:ImageConverter x:Key="imageConverter"/>
                 <local:VndCurrencyConverter x:Key="currencyConvert"/>
@@ -62,7 +60,7 @@
                                             <ImageBrush x:Name="userAvatar" RenderOptions.BitmapScalingMode="HighQuality" ImageSource="{Binding User.UserAvatar, Converter={StaticResource imageConverter}}"/>
                                         </Ellipse.Fill>
                                     </Ellipse>
-                                <TextBlock Text="{Binding User, Converter={StaticResource ouserConverter}}"/>
+                                <TextBlock Text="{Binding User.UserName}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -77,7 +75,7 @@
                                             <ImageBrush x:Name="productImg" RenderOptions.BitmapScalingMode="HighQuality" ImageSource="{Binding Product.ProductImg, Converter={StaticResource imageConverter}}"/>
                                         </Ellipse.Fill>
                                     </Ellipse>
-                                    <TextBlock Text="{Binding Product, Converter={StaticResource oproductConverter}}"/>
+                                    <TextBlock Text="{Binding Product.ProductName}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

@@ -34,7 +34,5 @@ namespace Wpf.MVVM.View
             M_UsersViewModel = new M_UsersViewModel(new UserService(), new CurrentComputerService(), new ComputerService());
             DataContext = M_UsersViewModel;
         }
-
-
     }
 }

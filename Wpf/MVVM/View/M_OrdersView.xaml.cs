@@ -43,40 +43,6 @@ namespace Wpf.MVVM.View
         }
     }
 
-    public class OrderUserConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is User user)
-            {
-                return user.UserName;
-            }
-            return "None";
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class OrderProductConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is Product product)
-            {
-                return product.ProductName;
-            }
-            return "None";
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     /// <summary>
     /// Interaction logic for M_OrdersView.xaml
     /// </summary>
