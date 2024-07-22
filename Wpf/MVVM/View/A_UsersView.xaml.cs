@@ -157,7 +157,7 @@ namespace Wpf.MVVM.View
         {
             if (sender is Button button && button.DataContext is User user)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Confirm,
+                DialogResult result = MessageBox.Show($"Are you sure you want to delete {user.UserName}", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Confirm,
                                                    MessageBox.MessageBoxButton.Cancel);
                 if(result == DialogResult.Yes)
                 {
@@ -174,6 +174,8 @@ namespace Wpf.MVVM.View
             if(cUser.ShowDialog() == true)
             {
                 A_UsersViewModel.createUser(newUser);
+                MessageBox.Show("Create Success!", MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Confirm,
+                                                   MessageBox.MessageBoxButton.Cancel);
                 cboFilter.SelectedValue = 4;
             }
             else
@@ -191,6 +193,8 @@ namespace Wpf.MVVM.View
                 if(updateUser.ShowDialog() == true)
                 {
                     A_UsersViewModel.updateUser(currentUser);
+                    MessageBox.Show("Update Success!", MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Confirm,
+                                                   MessageBox.MessageBoxButton.Cancel);
                     cboFilter.SelectedValue = 4;
                 }
                 else

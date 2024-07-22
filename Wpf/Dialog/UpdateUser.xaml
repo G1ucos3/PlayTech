@@ -3,14 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:Wpf.Dialog"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
+        MouseDown="Window_MouseDown"
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
-        Height="400" Width="400">
+        Height="400" Width="420">
 
     <Border Background="#FF2B2A2A" CornerRadius="10">
         <Grid Margin="0,0,0,83">
@@ -21,21 +23,95 @@
                 <TextBlock HorizontalAlignment="Center" FontSize="20" TextDecorations="Underline" FontWeight="Bold" Foreground="White" Margin="0 0 0 10">
                     UPDATE USER
                 </TextBlock>
-                <Label Content="Email" Foreground="White"/>
-                <TextBox x:Name="email" Foreground="White" BorderBrush="White" Text="{Binding CurrentUser.UserEmail, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
-                <Label Content="{Binding ElementName=email, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
+                <Label Content="Email" Foreground="White" Opacity="0.5"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="email" 
+                             Foreground="White"  
+                             Width="380"
+                             BorderThickness="0"
+                             TextChanged="email_TextChanged"/>
+                    <iconPacks:PackIconMaterial Kind="Email" 
+                                                VerticalAlignment="Center" 
+                                                HorizontalAlignment="Center"
+                                                Foreground="White"/>
 
-                <Label Content="Username" Foreground="White"/>
-                <TextBox x:Name="username" Foreground="White" BorderBrush="White" Text="{Binding CurrentUser.UserName, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}"/>
-                <Label Content="{Binding ElementName=username, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
+                </StackPanel>
+                <Border Width="400"
+                        Height="2"
+                        Background="White"
+                        x:Name="bdEmail"
+                        Margin="0 2 0 0"
+                        Opacity="0.5"/>
+                <TextBox x:Name="hiddenEmail" Text="{Binding CurrentUser.UserEmail, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" Visibility="Collapsed"/>
+                <Label Content="{Binding ElementName=hiddenEmail, Path=(Validation.Errors)[0].ErrorContent}" Background="Transparent" Foreground="Red" Height="25" Width="400" />
 
-                <Label Content="Password" Foreground="White"/>
-                <PasswordBox x:Name="passwordBox" Foreground="White" BorderBrush="White" PasswordChanged="passwordBox_PasswordChanged"/>
-                <TextBox x:Name="hiddenPasswordBox" Foreground="White" BorderBrush="White"  Text="{Binding CurrentUser.UserPassword, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" Visibility="Collapsed"/>
-                <Label Content="{Binding ElementName=hiddenPasswordBox, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red"/>
+                <Label Content="Username" Foreground="White" Opacity="0.5"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="txtUsername" 
+                             Foreground="White"  
+                             Width="380"
+                             BorderThickness="0"
+                             TextChanged="txtUsername_TextChanged"/>
+                    <iconPacks:PackIconMaterial Kind="Account" 
+                                                VerticalAlignment="Center" 
+                                                HorizontalAlignment="Center"
+                                                Foreground="White"/>
+
+                </StackPanel>
+                <Border Width="400"
+                        Height="2"
+                        Background="White"
+                        x:Name="bdUsername"
+                        Margin="0 2 0 0"
+                        Opacity="0.5"/>
+                <TextBox x:Name="hiddenUsername" Text="{Binding CurrentUser.UserName, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" Visibility="Collapsed"/>
+                <Label Content="{Binding ElementName=hiddenUsername, Path=(Validation.Errors)[0].ErrorContent}" Background="Transparent" Foreground="Red" Height="25" Width="400"/>
+
+                <Label Content="Password" Foreground="White" Opacity="0.5"/>
+                <StackPanel Orientation="Horizontal" Width="400">
+                    <Grid>
+                        <PasswordBox Foreground="White"  
+                                    Width="365"
+                                    x:Name="passwordBox"
+                                    PasswordChanged="passwordBox_PasswordChanged"
+                                    BorderThickness="0"/>
+                        <TextBox x:Name="showPasswordBox" 
+                                Foreground="White"  
+                                Width="365"
+                                TextChanged="showPasswordBox_TextChanged"
+                                Visibility="Collapsed"
+                                BorderThickness="0"/>
+                    </Grid>
+                    <Grid Margin="0 0 0 0">
+                        <Button Background="Transparent"
+                                Visibility="Collapsed"
+                                BorderThickness="0"
+                                x:Name="btnShow" Click="btnShow_Click">
+                            <iconPacks:PackIconMaterial Kind="Eye" 
+                                                        VerticalAlignment="Center" 
+                                                        HorizontalAlignment="Center"
+                                                        Foreground="White"/>
+                        </Button>
+                        <Button Background="Transparent"
+                                BorderThickness="0"
+                                x:Name="btnHide" Click="btnHide_Click">
+                            <iconPacks:PackIconMaterial Kind="EyeClosed" 
+                                                        VerticalAlignment="Center"
+                                                        Foreground="White"/>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+                <Border Width="400"
+                        Height="2"
+                        Margin="0 2 0 0"
+                        Background="White"
+                        x:Name="bdPassword"
+                        Opacity="0.5"/>
+                <TextBox x:Name="hiddenPasswordBox" Text="{Binding CurrentUser.UserPassword, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}" Visibility="Collapsed"/>
+                <Label Content="{Binding ElementName=hiddenPasswordBox, Path=(Validation.Errors)[0].ErrorContent}" Background="Transparent" Foreground="Red" Height="25" Width="400"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="110,259,110,-31">
+            <StackPanel Orientation="Horizontal" Margin="110,295,110,-67">
                 <Button Content="Update" Command="{Binding SubmitCommand}" Focusable="True" Margin="5" Style="{StaticResource ModernButtonStyle}"
                     Height="40" Width="80"/>
                 <Button Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" Margin="5" Style="{StaticResource ModernButtonStyle}"

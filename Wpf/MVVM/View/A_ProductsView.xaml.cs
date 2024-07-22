@@ -41,6 +41,8 @@ namespace Wpf.MVVM.View
             if(createProduct.ShowDialog() == true)
             {
                 a_ProductsViewModel.createProduct(newProduct);
+                MessageBox.Show("Create Success!", MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Confirm,
+                                                   MessageBox.MessageBoxButton.Cancel);
                 cboFilter.SelectedValue = 1;
             }
         }
@@ -54,6 +56,8 @@ namespace Wpf.MVVM.View
                 if (updateProduct.ShowDialog() == true)
                 {
                     a_ProductsViewModel.updateProduct(currentProduct);
+                    MessageBox.Show("Update Success!", MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Confirm,
+                                                   MessageBox.MessageBoxButton.Cancel);
                     cboFilter.SelectedValue = 1;
                 }
                 else
@@ -68,7 +72,7 @@ namespace Wpf.MVVM.View
             
             if (sender is Button button && button.DataContext is Product product)
             {
-                DialogResult result = MessageBox.Show("Are you sure?", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Confirm,
+                DialogResult result = MessageBox.Show($"Are you sure you want to delete {product.ProductName}", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Confirm,
                                                    MessageBox.MessageBoxButton.Cancel);
                 if (result == DialogResult.Yes)
                 {

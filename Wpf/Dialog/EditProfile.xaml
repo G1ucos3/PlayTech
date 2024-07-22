@@ -10,6 +10,7 @@
         Loaded="Window_Loaded"
         WindowStyle="None"
         Background="Transparent"
+        MouseDown="Window_MouseDown"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         Height="400" Width="400">
