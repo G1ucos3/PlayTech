@@ -19,5 +19,9 @@ namespace Repositories
 
         public ObservableCollection<CurrentComputer> GetCurrentComputerByUserID(int userID) => CurrentComputerDAO.GetCurrentComputerByUserID(userID);
         public ObservableCollection<CurrentComputer> GetCurrentComputerByComputerID(int computerId) => CurrentComputerDAO.GetCurrentComputerByComputerID(computerId);
+
+        public void DeleteCurrentComputerByUserID(int userID) => CurrentComputerDAO.GetCurrentComputerByUserID(userID);
+
+        public void DeleteCurrentComputerByComputerID(int computerID) => CurrentComputerDAO.GetCurrentComputerByComputerID(computerID);
     }
 }

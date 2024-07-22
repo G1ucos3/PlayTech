@@ -2,6 +2,8 @@
 using Service;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +23,6 @@ using UserControl = System.Windows.Controls.UserControl;
 
 namespace Wpf.MVVM.View
 {
-    /// <summary>
-    /// Interaction logic for A_ProductsView.xaml
-    /// </summary>
     public partial class A_ProductsView : UserControl
     {
         private A_ProductsViewModel a_ProductsViewModel;
@@ -66,6 +65,7 @@ namespace Wpf.MVVM.View
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+            
             if (sender is Button button && button.DataContext is Product product)
             {
                 DialogResult result = MessageBox.Show("Are you sure?", MessageBox.MessageBoxTittle.Confirm, MessageBox.MessageBoxButton.Confirm,

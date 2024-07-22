@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using BusinessObjects;
 using Wpf.MVVM.View;
+using System.IO;
+using System.Windows.Media.Imaging;
+using System.Globalization;
+using System.Windows.Data;
 
 namespace Wpf.MVVM.ViewModel
 {
@@ -15,6 +19,7 @@ namespace Wpf.MVVM.ViewModel
     {
         private readonly IUserService _userService;
         private readonly ICurrentComputerService _currentComputerService;
+        private readonly IOrderService _orderService;
         private readonly IComputerService _computerService;
         private ObservableCollection<User> users;
 
@@ -72,12 +77,14 @@ namespace Wpf.MVVM.ViewModel
             _userService = userService;
             _currentComputerService = currentComputerService;
             _computerService = computerService;
+            _orderService = new OrderService();
             loadUser();
         }
 
         public void loadUser()
         {
             var list = new ObservableCollection<User>();
+            
             var listUser = _userService.GetUser();
             int gamers = 0;
             int managers = 0;
@@ -147,6 +154,8 @@ namespace Wpf.MVVM.ViewModel
 
         public void deleteUser(User user)
         {
+            _orderService.DeleteOrderByUserID(user.UserId);
+            _currentComputerService.DeleteCurrentComputerByUserID(user.UserId);
             _userService.DeleteUser(user);
             loadUser();
         }

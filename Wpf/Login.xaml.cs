@@ -59,7 +59,7 @@ namespace Wpf
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             string userEmail = email.Text;
-            string userPassword = passwordBox.Password;
+            string userPassword = hiddenPasswordBox.Text;
             var currentUser = _userService.GetUserByEmail(userEmail);
             if (currentUser != null)
             {
@@ -72,7 +72,11 @@ namespace Wpf
                         admin.txtUserID.Text = currentUser.UserId.ToString();
                         admin.txtUsername.Text = currentUser.UserName;
                         var converter = new ImageSourceConverter();
-                        admin.avatar.ImageSource = (ImageSource)converter.ConvertFromString("pack://application:,,," + currentUser.UserAvatar);
+                        //MessageBox.Show(currentUser.UserAvatar, MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Confirm, MessageBox.MessageBoxButton.No);
+                        //admin.avatar.ImageSource = (ImageSource)converter.ConvertFromString("pack://application:,,," + currentUser.UserAvatar);
+                        string workingDirectory = Environment.CurrentDirectory;
+                        string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+                        admin.avatar.ImageSource = new BitmapImage(new Uri(projectDirectory + currentUser.UserAvatar, UriKind.Absolute));
                         admin.Show();
                         this.Close();
                     }

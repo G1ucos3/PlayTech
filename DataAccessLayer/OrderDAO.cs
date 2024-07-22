@@ -60,8 +60,38 @@ namespace DataAccessLayer
             try
             {
                 using var context = new PlayTechContext();
-                var p1 = context.Orders.SingleOrDefault(o => o.UserId == or.UserId);
+                var p1 = context.Orders.SingleOrDefault(o => o.OrderId == or.OrderId);
                 context.Orders.Remove(p1);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static void DeleteOrderByUserID(int userID)
+        {
+            try
+            {
+                using var context = new PlayTechContext();
+                var orders = context.Orders.Where(o => o.UserId == userID).ToList();
+                context.Orders.RemoveRange(orders);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static void DeleteOrderByProductID(int productID)
+        {
+            try
+            {
+                using var context = new PlayTechContext();
+                var orders = context.Orders.Where(o => o.ProductId == productID).ToList();
+                context.Orders.RemoveRange(orders);
                 context.SaveChanges();
             }
             catch (Exception ex)

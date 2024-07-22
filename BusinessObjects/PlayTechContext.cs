@@ -70,7 +70,7 @@ public partial class PlayTechContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__Orders__0809337D3B3ACA1B");
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__0809337DD04A866D");
 
             entity.Property(e => e.OrderId).HasColumnName("orderID");
             entity.Property(e => e.OrderDate)
@@ -82,10 +82,12 @@ public partial class PlayTechContext : DbContext
 
             entity.HasOne(d => d.Product).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_order_product");
 
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_order_user");
         });
 

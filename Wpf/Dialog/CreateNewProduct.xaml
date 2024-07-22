@@ -3,13 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Wpf.Dialog"
+        xmlns:localView="clr-namespace:Wpf.MVVM.View"
         mc:Ignorable="d"
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
-        Height="450" Width="400">
+        Height="600" Width="400">
 
     <Border Background="#FF2B2A2A" CornerRadius="10">
         <Grid Margin="0,0,0,83">
@@ -19,6 +21,7 @@
             <StackPanel Margin="10,10,10,0">
                 <StackPanel.Resources>
                     <local:IntConverter x:Key="intConverter"/>
+                    <localView:ImageConverter x:Key="productImgConverter"/>
                 </StackPanel.Resources>
                 <TextBlock HorizontalAlignment="Center" FontSize="20" TextDecorations="Underline" FontWeight="Bold" Foreground="White" Margin="0 0 0 10">
                         ADD PRODUCT
@@ -44,9 +47,29 @@
                 </ComboBox>
                 <Label Content="{Binding ElementName=cbType, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
 
+                <Label Content="Product Image" Margin="0 15 0 0" Foreground="White"/>
+                <Rectangle HorizontalAlignment="Center" Width="120" Height="120">
+                    <Rectangle.Fill>
+                        <ImageBrush x:Name="productImage" RenderOptions.BitmapScalingMode="HighQuality" ImageSource="{Binding CurrentProduct.ProductImg, Converter={StaticResource productImgConverter}}"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                        materialDesign:RippleAssist.Feedback="White" Background="#FF4E4C4C"
+                        Foreground="LightGray" materialDesign:ButtonAssist.CornerRadius="6"
+                        x:Name="btnImage"
+                        Margin="0 10 0 0"
+                        Click="btnImage_Click"
+                        Width="auto" Height="25" HorizontalAlignment="Center">
+                    <WrapPanel>
+                        <materialDesign:PackIcon Kind="Image" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                        <TextBlock Text="Change Image" FontSize="12"/>
+                    </WrapPanel>
+                </Button>
+
+
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="110,309,110,-81">
+            <StackPanel Orientation="Horizontal" Margin="110,399,110,-171">
                 <Button Content="Create" Command="{Binding SubmitCommand}" Focusable="True" Margin="5" Style="{StaticResource ModernButtonStyle}"
                         Height="40" Width="80"/>
                 <Button Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" Margin="5" Style="{StaticResource ModernButtonStyle}"

@@ -104,6 +104,7 @@ namespace Wpf.MVVM.ViewModel
 
         public void deleteComputer(Computer computer)
         {
+            _currentComputerService.DeleteCurrentComputerByComputerID(computer.ComputerId);
             _computerService.DeleteComputer(computer);
             loadComputer();
         }

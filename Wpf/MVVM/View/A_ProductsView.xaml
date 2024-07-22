@@ -10,6 +10,9 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel Margin="30 12 0 0">
+            <StackPanel.Resources>
+                <local:ImageConverter x:Key="productImgConverter"/>
+            </StackPanel.Resources>
             <DockPanel Margin="0 12 5 0">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
                            FontSize="15" FontWeight="Bold" Foreground="White" Text="All Products"/>
@@ -54,10 +57,15 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" IsReadOnly="True" Width="auto" Binding="{Binding ProductId}"/>
 
-                    <DataGridTemplateColumn Header="Product Name" IsReadOnly="True" Width="*">
+                    <DataGridTemplateColumn Header="Product" IsReadOnly="True" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
+                                    <Ellipse Width="30" Height="30" Margin="0 0 10 0">
+                                        <Ellipse.Fill>
+                                            <ImageBrush RenderOptions.BitmapScalingMode="HighQuality" ImageSource="{Binding ProductImg, Converter={StaticResource productImgConverter}}"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
                                     <TextBlock Text="{Binding ProductName}" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </DataTemplate>

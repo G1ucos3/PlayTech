@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,8 +71,9 @@ namespace Wpf
             {
                 _userService.UpdateUser(currentUser);
                 txtUsername.Text = currentUser.UserName;
-                var converter = new ImageSourceConverter();
-                avatar.ImageSource = (ImageSource)converter.ConvertFromString("pack://application:,,," + currentUser.UserAvatar);
+                string workingDirectory = Environment.CurrentDirectory;
+                string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+                avatar.ImageSource = new BitmapImage(new Uri(projectDirectory + currentUser.UserAvatar, UriKind.Absolute));
             }
         }
 
