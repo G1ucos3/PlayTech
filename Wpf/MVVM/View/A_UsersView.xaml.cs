@@ -22,6 +22,7 @@ using System.Windows.Shapes;
 using Wpf.Dialog;
 using Wpf.MVVM.ViewModel;
 using Button = System.Windows.Controls.Button;
+using Control = System.Windows.Controls.Control;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace Wpf.MVVM.View
