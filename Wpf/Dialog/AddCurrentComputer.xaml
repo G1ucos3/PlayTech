@@ -1,0 +1,81 @@
+﻿<Window x:Class="Wpf.Dialog.AddCurrentComputer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf.Dialog"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        Height="300" Width="420">
+
+    <Border Background="#FF2B2A2A" CornerRadius="10">
+        <Grid Margin="0,0,0,80">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120*" />
+            </Grid.RowDefinitions>
+            <StackPanel Margin="10,10,10,0">
+
+                <TextBlock HorizontalAlignment="Center" FontSize="20" TextDecorations="Underline" FontWeight="Bold" Foreground="White" Margin="0 0 0 10">
+                    ADD CURRENT COMPUTER
+                </TextBlock>
+
+                <Label Content="User Id" Foreground="White" Opacity="0.5"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="txtUserId" 
+                        Foreground="White"  
+                        Width="380"
+                        BorderThickness="0"
+                        TextChanged="userId_TextChanged"/>
+                    <iconPacks:PackIconMaterial Kind="Account" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center"
+                        Foreground="White"/>
+                </StackPanel>
+                <Border Width="400"
+                        Height="2"
+                        Background="White"
+                        x:Name="bdUserId"
+                        Margin="0 2 0 0"
+                        Opacity="0.5"/>
+
+                <TextBox x:Name="hiddenUserId" Foreground="White" BorderBrush="White" Text="{Binding CComputer.UserId, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}" 
+                        Visibility="Collapsed"/>
+                <Label Content="{Binding ElementName=hiddenUserId, Path=(Validation.Errors)[0].ErrorContent}"  Background="Transparent" Foreground="Red" Height="25" Width="380"/>
+
+            <Label Content="Computer Id" Foreground="White" Opacity="0.5"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="txtComputerId" 
+                        Foreground="White"  
+                        Width="380"
+                        BorderThickness="0"
+                        TextChanged="computerId_TextChanged"/>
+                    <iconPacks:PackIconMaterial Kind="Laptop" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center"
+                        Foreground="White"/>    
+                </StackPanel>
+                    <Border Width="400"
+                            Height="2"
+                            Background="White"
+                            x:Name="bdComputerId"
+                            Margin="0 2 0 0"
+                            Opacity="0.5"/>
+
+                <TextBox x:Name="hiddenComputerId" Foreground="White" BorderBrush="White" Text="{Binding CComputer.ComputerId, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}" 
+                             Visibility="Collapsed"/>
+                <Label Content="{Binding ElementName=hiddenComputerId, Path=(Validation.Errors)[0].ErrorContent}" Background="Transparent" Foreground="Red" Height="25" Width="380"/>    
+             </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="110,180,110,-90">
+                <Button Content="Add" Command="{Binding SubmitCommand}" Focusable="True" Margin="5" Style="{StaticResource ModernButtonStyle}"
+                Height="40" Width="80"/>
+                <Button Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" Margin="5" Style="{StaticResource ModernButtonStyle}" 
+                Height="40" Width="80"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

@@ -12,7 +12,7 @@
         Height="300" Width="420">
 
     <Border Background="#FF2B2A2A" CornerRadius="10">
-        <Grid Margin="0,0,0,83">
+        <Grid Margin="0,0,0,80">
             <Grid.RowDefinitions>
                 <RowDefinition Height="120*" />
             </Grid.RowDefinitions>

@@ -113,6 +113,23 @@
                         <TextBlock Foreground="White" FontSize="15" FontFamily="Helvetica">Products</TextBlock>
                     </WrapPanel>
                 </RadioButton>
+
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                        materialDesign:RippleAssist.Feedback="White" Background="#FF4E4C4C"
+                        x:Name="addCurrentComputer"
+                        Click="addCurrentComputer_Click"
+                        Foreground="LightGray" materialDesign:ButtonAssist.CornerRadius="6"
+                        Margin="0 50 0 0" Width="165" Height="45">
+                    <WrapPanel>
+                        <materialDesign:PackIcon Kind="Plus" VerticalAlignment="Center"
+                                             Foreground="White"
+                                             Height="20" Width="20"/>   
+                        <TextBlock TextWrapping="Wrap" FontSize="15" FontFamily="Helvetica"
+                                   HorizontalAlignment="Right" Margin="30 0 0 0">
+                            Add current computer
+                        </TextBlock>
+                    </WrapPanel>
+                </Button>
             </StackPanel>
         </materialDesign:ColorZone>
 
