@@ -23,5 +23,7 @@ namespace Repositories
         public void DeleteCurrentComputerByUserID(int userID) => CurrentComputerDAO.GetCurrentComputerByUserID(userID);
 
         public void DeleteCurrentComputerByComputerID(int computerID) => CurrentComputerDAO.GetCurrentComputerByComputerID(computerID);
+
+        public void DeleteAllCurrentComputer() => CurrentComputerDAO.DeleteAllCurrentComputer();
     }
 }

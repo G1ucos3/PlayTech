@@ -16,6 +16,7 @@ using Brushes = System.Windows.Media.Brushes;
 using BusinessObjects;
 using System.ComponentModel;
 using Microsoft.VisualBasic.Devices;
+using Service;
 
 namespace Wpf.Dialog
 {
@@ -24,6 +25,8 @@ namespace Wpf.Dialog
     /// </summary>
     public partial class AddCurrentComputer : Window, INotifyPropertyChanged
     {
+        private readonly IUserService _userService;
+        private readonly IComputerService _computerService;
         public CurrentComputer CComputer { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         
@@ -42,6 +45,8 @@ namespace Wpf.Dialog
         public AddCurrentComputer(CurrentComputer currentComputer)
         {
             InitializeComponent();
+            _userService = new UserService();
+            _computerService = new ComputerService();
             CComputer = currentComputer;
             SubmitCommand = new AcCommand(Submit, CanSubmit);
             DataContext = this;
@@ -53,6 +58,8 @@ namespace Wpf.Dialog
         {
             return (CComputer.UserId > 0 &&
                 CComputer.ComputerId > 0 &&
+                _userService.GetUserById(CComputer.UserId) != null &&
+                _computerService.GetComputerById(CComputer.ComputerId) != null &&
                 !CComputer.HasErrors);
         }
 
@@ -84,15 +91,27 @@ namespace Wpf.Dialog
 
         private void computerId_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (txtComputerId.Text.IsNullOrEmpty()) txtComputerId.Text = "0";
+            int n;
+            bool isNumeric = int.TryParse(txtComputerId.Text, out n);
+            if (!isNumeric) txtComputerId.Text = "0";
             hiddenComputerId.Text = txtComputerId.Text;
             if (hiddenComputerId.Text.IsNullOrEmpty()) bdComputerId.Background = Brushes.Red;
+            else bdComputerId.Background = Brushes.White;
+            if(isNumeric && n <=0) bdComputerId.Background = Brushes.Red;
             else bdComputerId.Background = Brushes.White;
         }
 
         private void userId_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (txtUserId.Text.IsNullOrEmpty()) txtUserId.Text = "0";
+            int n;
+            bool isNumeric = int.TryParse(txtUserId.Text, out n);
+            if (!isNumeric) txtUserId.Text = "0";
             hiddenUserId.Text = txtUserId.Text;
             if (hiddenUserId.Text.IsNullOrEmpty()) bdUserId.Background = Brushes.Red;
+            else bdUserId.Background = Brushes.White;
+            if (isNumeric && n <= 0) bdUserId.Background = Brushes.Red;
             else bdUserId.Background = Brushes.White;
         }
 
@@ -100,6 +119,12 @@ namespace Wpf.Dialog
         {
             DialogResult = false;
             Close();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
         }
     }
 }

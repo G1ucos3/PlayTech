@@ -100,6 +100,41 @@
 
                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                         materialDesign:RippleAssist.Feedback="White" Background="#FF4E4C4C"
+                        x:Name="addCurrentComputer"
+                        Click="addCurrentComputer_Click"
+                        Foreground="LightGray" materialDesign:ButtonAssist.CornerRadius="6"
+                        Margin="40 0 30 0" Width="120" Height="35">
+                    <WrapPanel>
+                        <materialDesign:PackIcon Kind="Plus" VerticalAlignment="Center"
+                                                 Foreground="White"
+                                                 Height="20" Width="20"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="11" FontFamily="Helvetica"
+                                   HorizontalAlignment="Right">
+                                Add current computer
+                        </TextBlock>
+                    </WrapPanel>
+                </Button>
+
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                        materialDesign:RippleAssist.Feedback="White" Background="#FF4E4C4C"
+                        x:Name="deleteAllCurrentComputer"
+                        Click="deleteAllCurrentComputer_Click"
+                        VerticalAlignment="Center"
+                        Foreground="LightGray" materialDesign:ButtonAssist.CornerRadius="6"
+                         Width="150" Height="35">      
+                    <WrapPanel>
+                        <materialDesign:PackIcon Kind="Minus" VerticalAlignment="Center"
+                                                 Foreground="White"
+                                                 Height="20" Width="20"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="11" FontFamily="Helvetica"
+                                   HorizontalAlignment="Right">
+                                Delete all current computer
+                        </TextBlock>
+                    </WrapPanel>
+                </Button>
+
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                        materialDesign:RippleAssist.Feedback="White" Background="#FF4E4C4C"
                         Foreground="LightGray" materialDesign:ButtonAssist.CornerRadius="6"
                         x:Name="btnCreate"
                         Click="btnCreate_Click"

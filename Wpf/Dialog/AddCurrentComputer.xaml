@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Wpf.Dialog"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
+        MouseDown="Window_MouseDown"
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
@@ -18,6 +19,10 @@
                 <RowDefinition Height="120*" />
             </Grid.RowDefinitions>
             <StackPanel Margin="10,10,10,0">
+
+                <StackPanel.Resources>
+                    <local:IntConverter x:Key="intConverter"/>
+                </StackPanel.Resources>
 
                 <TextBlock HorizontalAlignment="Center" FontSize="20" TextDecorations="Underline" FontWeight="Bold" Foreground="White" Margin="0 0 0 10">
                     ADD CURRENT COMPUTER
@@ -42,7 +47,7 @@
                         Margin="0 2 0 0"
                         Opacity="0.5"/>
 
-                <TextBox x:Name="hiddenUserId" Foreground="White" BorderBrush="White" Text="{Binding CComputer.UserId, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}" 
+                <TextBox x:Name="hiddenUserId" Foreground="White" BorderBrush="White" Text="{Binding CComputer.UserId, Converter={StaticResource intConverter}, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}" 
                         Visibility="Collapsed"/>
                 <Label Content="{Binding ElementName=hiddenUserId, Path=(Validation.Errors)[0].ErrorContent}"  Background="Transparent" Foreground="Red" Height="25" Width="380"/>
 
@@ -65,7 +70,7 @@
                             Margin="0 2 0 0"
                             Opacity="0.5"/>
 
-                <TextBox x:Name="hiddenComputerId" Foreground="White" BorderBrush="White" Text="{Binding CComputer.ComputerId, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}" 
+                <TextBox x:Name="hiddenComputerId" Foreground="White" BorderBrush="White" Text="{Binding CComputer.ComputerId, Converter={StaticResource intConverter}, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}" 
                              Visibility="Collapsed"/>
                 <Label Content="{Binding ElementName=hiddenComputerId, Path=(Validation.Errors)[0].ErrorContent}" Background="Transparent" Foreground="Red" Height="25" Width="380"/>    
              </StackPanel>

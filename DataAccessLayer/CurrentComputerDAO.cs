@@ -127,5 +127,13 @@ namespace DataAccessLayer
                 throw new Exception(ex.Message);
             }
         }
+
+        public static void DeleteAllCurrentComputer()
+        {
+            using var context = new PlayTechContext();
+            var allCurrentComputers = context.CurrentComputers.ToList();
+            context.CurrentComputers.RemoveRange(allCurrentComputers);
+            context.SaveChanges();
+        }
     }
 }

@@ -133,16 +133,14 @@ namespace Wpf.MVVM.View
     public partial class A_UsersView : UserControl
     {
         private A_UsersViewModel A_UsersViewModel;
+        private ICurrentComputerService _currentComputerService;
 
         public A_UsersView()
         {
             InitializeComponent();
             A_UsersViewModel = new A_UsersViewModel(new UserService(), new CurrentComputerService(), new ComputerService());
-            foreach(User user in A_UsersViewModel.Users)
-            {
-
-            }
             DataContext = A_UsersViewModel;
+            _currentComputerService = new CurrentComputerService();
             cboFilter.SelectedValue = 4;
         }
 
@@ -217,6 +215,24 @@ namespace Wpf.MVVM.View
             {
                 A_UsersViewModel.loadUser();
             }
+        }
+
+        private void addCurrentComputer_Click(object sender, RoutedEventArgs e)
+        {
+            var currentComputer = new CurrentComputer();
+            var addCurrentComputer = new AddCurrentComputer(currentComputer);
+            if (addCurrentComputer.ShowDialog() == true)
+            {
+                currentComputer.StartTime = DateTime.Now;
+                _currentComputerService.SaveCurrentComputer(currentComputer);
+                A_UsersViewModel.loadUser();
+            }
+        }
+
+        private void deleteAllCurrentComputer_Click(object sender, RoutedEventArgs e)
+        {
+            _currentComputerService.DeleteAllCurrentComputer();
+            A_UsersViewModel.loadUser();
         }
     }
 }

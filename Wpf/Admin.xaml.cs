@@ -18,16 +18,20 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Wpf.Dialog;
+using Wpf.MVVM.View;
+using Wpf.MVVM.ViewModel;
 
 namespace Wpf
 {
     public partial class Admin : Window, INotifyPropertyChanged
     {
-        private IUserService _userService;
+        private readonly IUserService _userService;
+        private readonly ICurrentComputerService _currentComputerService;
         public Admin()
         {
             InitializeComponent();
             _userService = new UserService();
+            _currentComputerService = new CurrentComputerService();
         }
 
         private void btnUsers_Click(object sender, RoutedEventArgs e)
@@ -83,16 +87,6 @@ namespace Wpf
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void addCurrentComputer_Click(object sender, RoutedEventArgs e)
-        {
-            var currentComputer = new CurrentComputer();
-            var addCurrentComputer = new AddCurrentComputer(currentComputer);
-            if (addCurrentComputer.ShowDialog() == true)
-            {
-
-            }
         }
     }
 }

@@ -13,5 +13,6 @@ namespace Service
         public ObservableCollection<CurrentComputer> GetCurrentComputerByComputerID(int computerId);
         public void DeleteCurrentComputerByUserID(int userID);
         public void DeleteCurrentComputerByComputerID(int computerID);
+        public void DeleteAllCurrentComputer();
     }
 }
