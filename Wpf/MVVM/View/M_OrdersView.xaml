@@ -14,6 +14,7 @@
                 <local:OrderUserConverter x:Key="ouserConverter"/>
                 <local:OrderProductConverter x:Key="oproductConverter"/>
                 <local:OrderStatusConverter x:Key="ostatusConverter"/>
+                <local:ImageConverter x:Key="imageConverter"/>
             </StackPanel.Resources>
 
             <DockPanel Margin="0 12 5 0">
@@ -56,10 +57,10 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <Ellipse Width="30" Height="30" Margin="0 0 10 0">
-                                    <Ellipse.Fill>
-                                        <ImageBrush x:Name="userAvatar" RenderOptions.BitmapScalingMode="HighQuality" ImageSource="{Binding User.UserAvatar, Converter={StaticResource avatarConverter}}"/>
-                                    </Ellipse.Fill>
-                                </Ellipse>
+                                        <Ellipse.Fill>
+                                            <ImageBrush x:Name="userAvatar" RenderOptions.BitmapScalingMode="HighQuality" ImageSource="{Binding User.UserAvatar, Converter={StaticResource imageConverter}}"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
                                 <TextBlock Text="{Binding User, Converter={StaticResource ouserConverter}}"/>
                                 </StackPanel>
                             </DataTemplate>
@@ -69,7 +70,14 @@
                     <DataGridTemplateColumn Header="Product" IsReadOnly="True" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Product, Converter={StaticResource oproductConverter}}"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Ellipse Width="30" Height="30" Margin="0 0 10 0">
+                                        <Ellipse.Fill>
+                                            <ImageBrush x:Name="productImg" RenderOptions.BitmapScalingMode="HighQuality" ImageSource="{Binding Product.ProductImg, Converter={StaticResource imageConverter}}"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                    <TextBlock Text="{Binding Product, Converter={StaticResource oproductConverter}}"/>
+                                </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
