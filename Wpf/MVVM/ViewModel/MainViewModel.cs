@@ -50,8 +50,8 @@ namespace Wpf.MVVM.ViewModel
             A_UsersVM = new A_UsersViewModel(new UserService(), new CurrentComputerService(), new ComputerService());
             CurrentView = A_UsersVM;
 
-            M_UsersVM = new M_UsersViewModel();
-            M_OrdersVM = new M_OrdersViewModel();
+            M_UsersVM = new M_UsersViewModel(new UserService(), new CurrentComputerService(), new ComputerService());
+            M_OrdersVM = new M_OrdersViewModel(new UserService(), new OrderService(), new ProductService());
             M_CurrentView = M_UsersVM;
 
             A_UsersCommand = new RelayCommand(o =>
