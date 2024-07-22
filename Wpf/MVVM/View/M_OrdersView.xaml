@@ -51,15 +51,22 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" IsReadOnly="True" Width="auto" Binding="{Binding OrderId}"/>
 
-                    <DataGridTemplateColumn Header="UserName" IsReadOnly="True" Width="auto">
+                    <DataGridTemplateColumn Header="User" IsReadOnly="True" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Ellipse Width="30" Height="30" Margin="0 0 10 0">
+                                    <Ellipse.Fill>
+                                        <ImageBrush x:Name="userAvatar" RenderOptions.BitmapScalingMode="HighQuality" ImageSource="{Binding User.UserAvatar, Converter={StaticResource avatarConverter}}"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
                                 <TextBlock Text="{Binding User, Converter={StaticResource ouserConverter}}"/>
+                                </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="Product Name" IsReadOnly="True" Width="auto">
+                    <DataGridTemplateColumn Header="Product" IsReadOnly="True" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Product, Converter={StaticResource oproductConverter}}"/>
