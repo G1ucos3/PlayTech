@@ -71,9 +71,6 @@ namespace Wpf
                         var admin = new Admin();
                         admin.txtUserID.Text = currentUser.UserId.ToString();
                         admin.txtUsername.Text = currentUser.UserName;
-                        var converter = new ImageSourceConverter();
-                        //MessageBox.Show(currentUser.UserAvatar, MessageBox.MessageBoxTittle.Info, MessageBox.MessageBoxButton.Confirm, MessageBox.MessageBoxButton.No);
-                        //admin.avatar.ImageSource = (ImageSource)converter.ConvertFromString("pack://application:,,," + currentUser.UserAvatar);
                         string workingDirectory = Environment.CurrentDirectory;
                         string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
                         admin.avatar.ImageSource = new BitmapImage(new Uri(projectDirectory + currentUser.UserAvatar, UriKind.Absolute));
@@ -86,7 +83,6 @@ namespace Wpf
                         var manager = new Manager();
                         manager.txtUserID.Text = currentUser.UserId.ToString();
                         manager.txtUsername.Text = currentUser.UserName;
-                        var converter = new ImageSourceConverter();
                         string workingDirectory = Environment.CurrentDirectory;
                         string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
                         manager.avatar.ImageSource = new BitmapImage(new Uri(projectDirectory + currentUser.UserAvatar, UriKind.Absolute));
